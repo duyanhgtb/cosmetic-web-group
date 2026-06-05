@@ -1,0 +1,1426 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOM BEAUTY | Thế Giới Mỹ Phẩm Chính Hãng & Trendy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+
+<body>
+    <div class="page-loader" id="page-loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-logo">BLOOM BEAUTY</div>
+    </div>
+    <div class="top-bar">
+        Freeship 15K mọi đơn hàng <span>·</span> Mua là có quà <span>·</span> Mua online nhận tại cửa hàng gần nhất
+    </div>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Bloom Beauty</a>
+        
+        <div class="search-container">
+            <span class="material-icons search-icon-left">search</span>
+            <input type="text" class="search-input" placeholder="Freshian đồng giá 299k...">
+            <span class="material-icons search-icon-right" id="filter-toggle-btn" onclick="toggleSkinFilter()" style="cursor: pointer; right: 40px; color: #555;" title="Lọc theo loại da">tune</span>
+            <span class="material-icons search-icon-right" id="face-ai-btn" onclick="openFaceAI()" style="cursor: pointer; right: 15px; color: var(--primary);" title="Phân tích da khuôn mặt bằng AI">photo_camera</span>
+        </div>
+        
+        <div class="header-utilities">
+            <div class="utility-link" onclick="window.location.href='#store'">
+                <span class="material-icons">storefront</span>
+                <span>Hệ thống cửa hàng</span>
+            </div>
+            <div class="utility-link" onclick="window.location.href='#magazine'">
+                <span class="material-icons">edit_note</span>
+                <span>Tạp chí làm đẹp</span>
+            </div>
+            <div class="utility-link" style="position: relative;" id="more-utility-link">
+                <span class="material-icons">more_horiz</span>
+                <div class="more-dropdown" id="more-dropdown">
+                    <a href="#about" class="dropdown-item">Câu Chuyện Thương Hiệu</a>
+                    <a href="#store" class="dropdown-item">Hệ Thống Cửa Hàng</a>
+                    <a href="#magazine" class="dropdown-item">Tạp Chí Làm Đẹp</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="privacy-policy.html" class="dropdown-item">Chính Sách Bảo Mật</a>
+                    <a href="return-policy.html" class="dropdown-item">Chính Sách Đổi Trả</a>
+                </div>
+            </div>
+            
+            <div class="utility-link" onclick="toggleTheme()" id="theme-toggle-btn" style="padding: 4px;" title="Chuyển chế độ Sáng/Tối">
+                <span class="material-icons" id="theme-toggle-icon">dark_mode</span>
+            </div>
+
+            <a href="login.html" class="utility-link">
+                <span class="material-icons" id="auth-icon">person_outline</span>
+                <span id="auth-text">Đăng nhập</span>
+            </a>
+            
+            <div class="utility-link" id="wishlist-icon" style="position: relative;">
+                <span class="material-icons">favorite_border</span>
+                <div class="wishlist-count" id="wishlist-badge">0</div>
+            </div>
+            
+            <div class="utility-link" id="cart-icon" style="position: relative;">
+                <span class="material-icons">shopping_bag</span>
+                <div class="cart-count" id="cart-badge">0</div>
+            </div>
+        </div>
+    </nav>
+    <div class="capsule-menu-bar">
+        <div class="capsule-wrapper">
+            <div class="capsules-container" id="capsules-container">
+                <div class="capsule-item capsule-brand" onclick="filterCategory('all')">Thương hiệu</div>
+                <div class="capsule-item capsule-sale" onclick="filterCategory('sale')">Khuyến mãi hot</div>
+                <div class="capsule-item capsule-makeup" onclick="filterCategory('Trang điểm')">Trang điểm</div>
+                <div class="capsule-item capsule-skincare" onclick="filterCategory('Chăm sóc da')">Chăm Sóc Da Mặt</div>
+                <div class="capsule-item capsule-body" onclick="filterCategory('body')">Chăm sóc cơ thể</div>
+                <div class="capsule-item capsule-new" onclick="filterCategory('Nước hoa')">Nước hoa</div>
+                <div class="capsule-item capsule-online" onclick="filterCategory('online')">Đặt hàng Online & Nhận tại CH</div>
+            </div>
+            <button class="capsule-nav-btn" id="capsule-next-btn">
+                <span class="material-icons">chevron_right</span>
+            </button>
+        </div>
+    </div>
+    <div class="skin-filter-panel" id="skin-filter-panel">
+        <div class="skin-filter-container container">
+            <div class="filter-title">
+                <span class="material-icons" style="font-size: 1.1rem; vertical-align: middle; color: var(--primary);">spa</span>
+                Gợi ý mỹ phẩm theo loại da:
+            </div>
+            <div class="skin-checkboxes">
+                <label class="skin-checkbox-label">
+                    <input type="checkbox" value="dầu" class="skin-checkbox-input" onchange="applySkinFilters()">
+                    <span class="custom-checkbox"></span>
+                    Da Dầu (Oily)
+                </label>
+                <label class="skin-checkbox-label">
+                    <input type="checkbox" value="khô" class="skin-checkbox-input" onchange="applySkinFilters()">
+                    <span class="custom-checkbox"></span>
+                    Da Khô (Dry)
+                </label>
+                <label class="skin-checkbox-label">
+                    <input type="checkbox" value="hỗn hợp" class="skin-checkbox-input" onchange="applySkinFilters()">
+                    <span class="custom-checkbox"></span>
+                    Da Hỗn Hợp (Combination)
+                </label>
+                <label class="skin-checkbox-label">
+                    <input type="checkbox" value="nhạy cảm" class="skin-checkbox-input" onchange="applySkinFilters()">
+                    <span class="custom-checkbox"></span>
+                    Da Nhạy Cảm (Sensitive)
+                </label>
+            </div>
+            <button class="clear-filter-btn" onclick="clearSkinFilters()">Xóa lọc</button>
+        </div>
+    </div>
+    <div class="hero-slider-container">
+        <div class="slider-wrapper" id="slider-wrapper">
+            <div class="slide slide-peripera">
+                <div class="slide-content-layout container">
+                    <div class="slide-left-column">
+                        <span class="slide-brand-badge">peripera</span>
+                        <span class="slide-promo-tag">ĐỒNG GIÁ HẤP DẪN</span>
+                        <h1 class="slide-title-large">HƠN 80 BRAND XỊN<br><span>ĐỒNG GIÁ 49K & 99K</span></h1>
+                        <p class="slide-subtitle">Sản phẩm má hồng & son kem Peripera Syrupy Tok Cheek chính hãng cực hot.</p>
+                        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                            <button class="slide-btn" onclick="window.location.href='#products'">Chốt Deal Ngay</button>
+                            <button class="slide-btn" style="background: transparent; color: var(--primary); border-color: var(--primary); display: inline-flex; align-items: center; gap: 5px;" onclick="window.tryOnManager.open()">
+                                <span class="material-icons">camera_alt</span> Thử Màu Son AR
+                            </button>
+                        </div>
+                    </div>
+                    <div class="slide-center-column">
+                        <img src="images/banner_peripera_lipstick.png" alt="Peripera" class="slide-model-img">
+                        <div class="slide-product-badge slide-badge-left">ĐỒNG GIÁ<br><strong>49k</strong></div>
+                        <div class="slide-product-badge slide-badge-right">CHỈ TỪ<br><strong>99k</strong></div>
+                    </div>
+                    <div class="slide-right-column">
+                        <div class="slide-side-promo-box">
+                            <h3>Đại Tiệc Thương Hiệu <span>GIẢM SẬP SÀN 50%</span></h3>
+                            <p>Áp dụng tại Website & hệ thống cửa hàng The Beauty trên toàn quốc.</p>
+                            <button class="btn btn-outline" style="width: 100%; border-radius: 20px;" onclick="window.location.href='#products'">MUA NGAY</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide slide-vitac">
+                <div class="slide-content-layout container">
+                    <div class="slide-left-column">
+                        <span class="slide-brand-badge">goodal</span>
+                        <span class="slide-promo-tag">DƯỠNG SÁNG MỜ THÂM</span>
+                        <h1 class="slide-title-large">GREEN TANGERINE<br><span>VITA-C DARK SPOT LINE</span></h1>
+                        <p class="slide-subtitle">Khám phá serum vitamin C chiết xuất quýt xanh đảo Jeju giúp sáng da mờ thâm.</p>
+                        <button class="slide-btn" onclick="window.location.href='#products'">MUA NGAY</button>
+                    </div>
+                    <div class="slide-center-column">
+                        <img src="images/banner_goodal_serum.png" alt="Vita-C Serum" class="slide-model-img">
+                        <div class="slide-product-badge slide-badge-left" style="background-color: #2d8244; color: white;">NEW<br><strong>FORMULA</strong></div>
+                        <div class="slide-product-badge slide-badge-right">GIẢM ĐẾN<br><strong>30%</strong></div>
+                    </div>
+                    <div class="slide-right-column">
+                        <div class="slide-side-promo-box" style="border-color: rgba(45, 130, 68, 0.15);">
+                            <h3 style="color: #2d8244;">Cải thiện vết thâm<span>SAU 2 TUẦN</span></h3>
+                            <p>Chiết xuất từ thiên nhiên lành tính, nâng cấp gấp đôi lượng hoạt chất dưỡng sáng da tự nhiên.</p>
+                            <button class="btn btn-outline" style="width: 100%; border-radius: 20px; border-color: #2d8244; color: #2d8244;" onclick="window.location.href='#products'">Xem chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide slide-perfume">
+                <div class="slide-content-layout container">
+                    <div class="slide-left-column">
+                        <span class="slide-brand-badge" style="background-color: #d62d51;">chanel</span>
+                        <span class="slide-promo-tag" style="color: #d62d51;">HƯƠNG THƠM QUYẾN RŨ</span>
+                        <h1 class="slide-title-large">BLOSSOM LOVE PINK<br><span>ĐẠI TIỆC NƯỚC HOA</span></h1>
+                        <p class="slide-subtitle">Khám phá các nốt hương hoa cỏ ngọt ngào, tinh tế giúp bạn tự tin tỏa sáng mọi khoảnh khắc.</p>
+                        <button class="slide-btn" style="border-color: #d62d51; color: #d62d51; box-shadow: 0 4px 10px rgba(214, 45, 81, 0.15);" onclick="window.location.href='#products'">MUA NGAY</button>
+                    </div>
+                    <div class="slide-center-column">
+                        <img src="images/banner_chanel_perfume.png" alt="Blossom Perfume" class="slide-model-img">
+                        <div class="slide-product-badge slide-badge-left" style="background-color: #d62d51; color: white;">FRESH<br><strong>SCENT</strong></div>
+                        <div class="slide-product-badge slide-badge-right" style="background-color: #ffe6eb; color: #d62d51;">GIẢM<br><strong>20%</strong></div>
+                    </div>
+                    <div class="slide-right-column">
+                        <div class="slide-side-promo-box" style="border-color: rgba(214, 45, 81, 0.15);">
+                            <h3 style="color: #d62d51;">Nốt hương mùa hè<span>QUYẾN RŨ & CUỐN HÚT</span></h3>
+                            <p>Sản phẩm nước hoa cao cấp chính hãng, độ lưu hương lâu tới 24 giờ liên tục.</p>
+                            <button class="btn btn-outline" style="width: 100%; border-radius: 20px; border-color: #d62d51; color: #d62d51;" onclick="window.location.href='#products'">Xem bộ sưu tập</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide slide-foundation">
+                <div class="slide-content-layout container">
+                    <div class="slide-left-column">
+                        <span class="slide-brand-badge" style="background-color: #cc6600;">clio</span>
+                        <span class="slide-promo-tag" style="color: #cc6600;">LỚP NỀN HOÀN HẢO</span>
+                        <h1 class="slide-title-large">VELVET FOUNDATION<br><span>MỊN LỲ SUỐT 16H</span></h1>
+                        <p class="slide-subtitle">Kem nền thế hệ mới che phủ hoàn hảo, mỏng nhẹ tự nhiên như làn da thứ hai của bạn.</p>
+                        <button class="slide-btn" style="border-color: #cc6600; color: #cc6600; box-shadow: 0 4px 10px rgba(204, 102, 0, 0.15);" onclick="window.location.href='#products'">MUA NGAY</button>
+                    </div>
+                    <div class="slide-center-column">
+                        <img src="images/banner_clio_foundation.png" alt="Clio Foundation" class="slide-model-img">
+                        <div class="slide-product-badge slide-badge-left" style="background-color: #cc6600; color: white;">SPF50+<br><strong>PA+++</strong></div>
+                        <div class="slide-product-badge slide-badge-right" style="background-color: #fff0e0; color: #cc6600;">KIỀM DẦU<br><strong>16H</strong></div>
+                    </div>
+                    <div class="slide-right-column">
+                        <div class="slide-side-promo-box" style="border-color: rgba(204, 102, 0, 0.15);">
+                            <h3 style="color: #cc6600;">Làn da mịn mượt<span>KHÔNG TÌ VẾT</span></h3>
+                            <p>Tặng ngay cọ tán kem nền cao cấp trị giá 250k cho mỗi đơn hàng mua kem nền Clio.</p>
+                            <button class="btn btn-outline" style="width: 100%; border-radius: 20px; border-color: #cc6600; color: #cc6600;" onclick="window.location.href='#products'">Nhận quà tặng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="slider-arrow slider-arrow-left" id="slider-prev-btn">
+            <span class="material-icons">chevron_left</span>
+        </button>
+        <button class="slider-arrow slider-arrow-right" id="slider-next-btn">
+            <span class="material-icons">chevron_right</span>
+        </button>
+        <div class="slider-dots" id="slider-dots">
+            <div class="slider-dot active" data-index="0"></div>
+            <div class="slider-dot" data-index="1"></div>
+            <div class="slider-dot" data-index="2"></div>
+            <div class="slider-dot" data-index="3"></div>
+        </div>
+    </div>
+    <section id="about" class="container">
+        <div class="about-section">
+            <div class="about-img">
+                <img src="images/brand_story_img_1776407208755.png" alt="Brand Story">
+            </div>
+            <div class="about-content">
+                <div class="section-title" style="text-align: left;">
+                    <p>Câu chuyện thương hiệu</p>
+                    <h2 style="margin-top: 10px;">Tinh Hoa Hội Tụ Trendy</h2>
+                </div>
+                <p>The Beauty là hệ thống cửa hàng mỹ phẩm phân phối chính hãng hàng đầu, quy tụ hơn 80 thương hiệu làm đẹp đình đám từ Hàn Quốc, Nhật Bản và khắp nơi trên thế giới. Chúng tôi mang đến cho bạn các xu hướng trang điểm, chăm sóc da mới nhất để bạn luôn tự tin, nổi bật và là chính mình.</p>
+                <br>
+                <p>Cam kết 100% sản phẩm đạt chuẩn an toàn, nguồn gốc chính hãng và mang đến dịch vụ tư vấn chăm sóc khách hàng đẳng cấp, mang đậm cá tính trẻ trung.</p>
+                <br>
+                <a href="#" class="btn btn-outline">Tìm hiểu thêm</a>
+            </div>
+        </div>
+    </section>
+    <section id="products" class="container">
+        <div class="section-title" style="margin-bottom: 25px;">
+            <p>Hot deal không thể bỏ lỡ</p>
+            <h2>Sản Phẩm Bán Chạy Nhất</h2>
+        </div>
+        <div style="text-align: center; margin-bottom: 40px;">
+            <button class="advanced-filter-btn" onclick="window.sidebarFilter.open()">
+                <span class="material-icons" style="font-size:1.15rem; vertical-align:middle; margin-right:4px;">filter_alt</span> Bộ Lọc Nâng Cao
+            </button>
+        </div>
+
+        <div class="product-grid" id="product-list">
+        </div>
+    </section>
+    <section id="magazine" class="container">
+        <div class="section-title">
+            <p>Xu hướng & Cẩm nang</p>
+            <h2>Tạp Chí Làm Đẹp THE BEAUTY</h2>
+        </div>
+        <div class="magazine-grid">
+            <div class="magazine-card">
+                <div class="magazine-img">
+                    <img src="images/brand_story_img_1776407208755.png" alt="Xu hướng Son Môi">
+                </div>
+                <div class="magazine-info">
+                    <span class="magazine-tag">Xu hướng</span>
+                    <h3>Top 5 Dòng Son Trendy Dự Đoán Sẽ Gây Bão Hè 2026</h3>
+                    <p>Cập nhật ngay các bảng màu cực trendy giúp bờ môi quyến rũ, căng mọng đầy cá tính cho những chuyến du lịch biển sắp tới.</p>
+                    <a href="#magazine" class="magazine-link" onclick="openArticleModal('a1')">Đọc thêm <span class="material-icons">arrow_forward</span></a>
+                </div>
+            </div>
+            <div class="magazine-card">
+                <div class="magazine-img">
+                    <img src="images/luxury_serum_1776404500065.png" alt="Dưỡng Da Mùa Hè">
+                </div>
+                <div class="magazine-info">
+                    <span class="magazine-tag">Chăm sóc da</span>
+                    <h3>Quy Trình 4 Bước Dưỡng Sáng Da Mờ Thâm Sau 2 Tuần</h3>
+                    <p>Mùa hè nắng nóng, thâm sạm và mụn dễ hình thành. Tìm hiểu bí quyết chăm sóc tối giản với Vitamin C quýt xanh giúp da sáng khỏe tự nhiên.</p>
+                    <a href="#magazine" class="magazine-link" onclick="openArticleModal('a2')">Đọc thêm <span class="material-icons">arrow_forward</span></a>
+                </div>
+            </div>
+            <div class="magazine-card">
+                <div class="magazine-img">
+                    <img src="images/skincare_cream_1776407395965.png" alt="Skincare Tips">
+                </div>
+                <div class="magazine-info">
+                    <span class="magazine-tag">Bí quyết làm đẹp</span>
+                    <h3>Hướng Dẫn Chọn Kem Dưỡng Phủ Hợp Cho Từng Loại Da</h3>
+                    <p>Da dầu có cần dưỡng ẩm không? Làm thế nào để chọn đúng kem dưỡng không gây bít tắc chân lông? Xem ngay phân tích chi tiết từ chuyên gia.</p>
+                    <a href="#magazine" class="magazine-link" onclick="openArticleModal('a3')">Đọc thêm <span class="material-icons">arrow_forward</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="store" class="store-section">
+        <div class="container">
+            <div class="section-title">
+                <p>Trải nghiệm mua sắm trực tiếp</p>
+                <h2>Hệ Thống Cửa Hàng</h2>
+            </div>
+            
+            <div class="store-tabs">
+                <button class="store-tab-btn active" onclick="window.uiManager.switchStoreTab('hcm')">TP. HỒ CHÍ MINH</button>
+                <button class="store-tab-btn" onclick="window.uiManager.switchStoreTab('hn')">HÀ NỘI</button>
+                <button class="store-tab-btn" onclick="window.uiManager.switchStoreTab('dn')">ĐÀ NẴNG</button>
+            </div>
+            
+            <div class="store-content-wrapper">
+                <div class="store-tab-content active" id="store-hcm">
+                    <div class="store-list">
+                        <div class="store-item">
+                            <div class="store-item-header">
+                                <span class="material-icons">place</span>
+                                <h4>The Beauty - Vạn Hạnh Mall</h4>
+                            </div>
+                            <p>Tầng Trệt, TTTM Vạn Hạnh Mall, 11 Sư Vạn Hạnh, Quận 10, TP.HCM</p>
+                            <p class="store-phone"><span class="material-icons">phone</span> 0888300368</p>
+                            <p class="store-time"><span class="material-icons">schedule</span> 09:30 - 22:00</p>
+                            <button class="btn btn-outline store-map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Beauty+Box+Van+Hanh+Mall+Quan+10+TP+HCM', '_blank')">Chỉ đường</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="store-tab-content" id="store-hn" style="display: none;">
+                    <div class="store-list">
+                        <div class="store-item">
+                            <div class="store-item-header">
+                                <span class="material-icons">place</span>
+                                <h4>The Beauty - Chùa Bộc</h4>
+                            </div>
+                            <p>12 Chùa Bộc, Đống Đa, TP.HN</p>
+                            <p class="store-phone"><span class="material-icons">phone</span> 0888300368</p>
+                            <p class="store-time"><span class="material-icons">schedule</span> 09:00 - 22:00</p>
+                            <button class="btn btn-outline store-map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Beauty+Box+12+Chua+Boc+Dong+Da+Ha+Noi', '_blank')">Chỉ đường</button>
+                        </div>
+                        <div class="store-item">
+                            <div class="store-item-header">
+                                <span class="material-icons">place</span>
+                                <h4>The Beauty - Vincom Bà Triệu</h4>
+                            </div>
+                            <p>Tầng 1, Vincom Center Bà Triệu, 191 Bà Triệu, Quận Hai Bà Trưng, Hà Nội</p>
+                            <p class="store-phone"><span class="material-icons">phone</span> 0888300368</p>
+                            <p class="store-time"><span class="material-icons">schedule</span> 09:30 - 22:00</p>
+                            <button class="btn btn-outline store-map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Beauty+Box+Vincom+Ba+Trieu+Hai+Ba+Trung+Ha+Noi', '_blank')">Chỉ đường</button>
+                        </div>
+                        <div class="store-item">
+                            <div class="store-item-header">
+                                <span class="material-icons">place</span>
+                                <h4>The Beauty - Lotte Mall Tây Hồ</h4>
+                            </div>
+                            <p>Tầng Trệt, Lotte Mall West Lake, 272 Võ Chí Công, Quận Tây Hồ, Hà Nội</p>
+                            <p class="store-phone"><span class="material-icons">phone</span> 0888300368</p>
+                            <p class="store-time"><span class="material-icons">schedule</span> 09:30 - 22:00</p>
+                            <button class="btn btn-outline store-map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Beauty+Box+Lotte+Mall+West+Lake+Tay+Ho+Ha+Noi', '_blank')">Chỉ đường</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="store-tab-content" id="store-dn" style="display: none;">
+                    <div class="store-list">
+                        <div class="store-item">
+                            <div class="store-item-header">
+                                <span class="material-icons">place</span>
+                                <h4>The Beauty - Lê Duẩn</h4>
+                            </div>
+                            <p>456 Lê Duẩn, Phường Chính Gián, Quận Thanh Khê, Đà Nẵng</p>
+                            <p class="store-phone"><span class="material-icons">phone</span> 0888300368</p>
+                            <p class="store-time"><span class="material-icons">schedule</span> 09:00 - 22:00</p>
+                            <button class="btn btn-outline store-map-btn" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Beauty+Box+456+Le+Duan+Thanh+Khê+Da+Nang', '_blank')">Chỉ đường</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-col">
+            <a href="#" class="logo">Bloom Beauty</a>
+            <p>Nhà phân phối chính hãng độc quyền của hơn 80 brand làm đẹp hàng đầu thế giới. Nâng tầm khí chất trẻ trung của bạn.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Đường Dẫn</h4>
+            <a href="#home">Trang Chủ</a>
+            <a href="#about">Về Chúng Tôi</a>
+            <a href="#products">Sản Phẩm Nổi Bật</a>
+        </div>
+        <div class="footer-col">
+            <h4>Chính Sách</h4>
+            <a href="privacy-policy.html">Bảo Mật Thông Tin</a>
+            <a href="payment-policy.html">Chấp Nhận Thanh Toán</a>
+            <a href="return-policy.html">Gửi Trả Hàng</a>
+        </div>
+        <div class="footer-col">
+            <h4>Liên Hệ</h4>
+            <p><i class="fas fa-envelope"></i> info@thebeauty.vn</p>
+            <p><i class="fas fa-phone"></i> 0888300368</p>
+            <p><i class="fas fa-map-marker-alt"></i> 12 Chùa Bộc, Đống Đa, TP.HN</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 BLOOM BEAUTY Cosmetic. Bản quyền thuộc về Thế Giới Mỹ Phẩm Trendy.</p>
+        </div>
+    </footer>
+    <div class="wishlist-overlay" id="wishlist-overlay"></div>
+    <div class="wishlist-drawer" id="wishlist-drawer">
+        <div class="wishlist-header">
+            <h3>Sản Phẩm Yêu Thích</h3>
+            <span class="material-icons" id="close-wishlist" style="cursor: pointer;">close</span>
+        </div>
+        <div class="wishlist-items" id="wishlist-items-container">
+        </div>
+    </div>
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Giỏ Hàng</h3>
+            <span class="material-icons" id="close-cart" style="cursor: pointer;">close</span>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <span id="cart-total-price">0 ₫</span>
+            </div>
+            <button class="checkout-btn" onclick="window.location.href='checkout.html'">Thanh Toán</button>
+        </div>
+    </div>
+    <div class="compare-bar" id="compare-bar">
+        <div class="compare-bar-container container">
+            <div class="compare-slots" id="compare-slots">
+            </div>
+            <div class="compare-actions">
+                <button class="btn-compare" id="compare-now-btn" onclick="openCompareModal()">So Sánh Ngay</button>
+                <button class="btn-clear-compare" onclick="clearCompareList()">Xóa Hết</button>
+            </div>
+        </div>
+    </div>
+    <div class="compare-modal-overlay" id="compare-modal-overlay">
+        <div class="compare-modal-content">
+            <span class="material-icons close-compare-modal" onclick="closeCompareModal()">close</span>
+            <h3>So Sánh Chi Tiết Sản Phẩm</h3>
+            <div style="overflow-x: auto; margin-top: 15px;">
+                <table class="compare-table" id="compare-table">
+                </table>
+            </div>
+            <div class="compare-analysis-box" id="compare-analysis-box">
+            </div>
+        </div>
+    </div>
+    <div class="article-modal-overlay" id="article-modal-overlay">
+        <div class="article-modal-content">
+            <span class="material-icons close-article-modal" onclick="closeArticleModal()">close</span>
+            <div class="article-detail-header">
+                <span class="article-detail-tag" id="article-detail-tag">Chủ đề</span>
+                <h2 class="article-detail-title" id="article-detail-title">Tiêu đề bài viết</h2>
+                <div class="article-detail-meta" id="article-detail-meta">Đăng ngày 03/06/2026 bởi Admin</div>
+            </div>
+            <div class="article-detail-body">
+                <img src="" alt="Article Banner" class="article-detail-img" id="article-detail-img">
+                <div class="article-detail-text" id="article-detail-text">
+                </div>
+            </div>
+            <div class="article-related-section">
+                <h4>Sản phẩm khuyên dùng liên quan:</h4>
+                <div class="article-related-grid" id="article-related-grid">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="face-ai-overlay" id="face-ai-overlay">
+        <div class="face-ai-content">
+            <span class="material-icons close-face-ai" onclick="closeFaceAI()">close</span>
+            <h3>Trợ Lý AI Phân Tích Da Khuôn Mặt</h3>
+            <p style="font-size: 0.75rem; color: #666; margin-bottom: 15px;">Cấp quyền Camera để AI quét khuôn mặt phân tích cấu trúc da của bạn hoặc sử dụng ảnh khuôn mặt mẫu.</p>
+            
+            <div class="scanner-container" style="position:relative;">
+                <video id="webcam" autoplay playsinline muted style="width: 100%; height: 100%; object-fit: cover;"></video>
+                <img id="sample-face" src="images/brand_story_img_1776407208755.png" alt="Sample Face" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                <canvas id="face-mesh-canvas" class="face-mesh-canvas"></canvas>
+                <div class="scanner-hud-left" id="scanner-hud-left" style="display:none;"></div>
+                <div class="scanner-hud-right" id="scanner-hud-right" style="display:none;"></div>
+                <div class="scan-line" id="scan-line"></div>
+                <div class="scanner-status" id="scanner-status">Camera sẵn sàng</div>
+            </div>
+
+            <div class="scanner-actions">
+                <button class="btn-scan-action btn-primary-scan" id="start-scan-btn" onclick="startSkinScan()">Bắt Đầu Phân Tích Da</button>
+                <button class="btn-scan-action btn-secondary-scan" id="switch-source-btn" onclick="useSampleImage()">Dùng ảnh mẫu</button>
+            </div>
+            <div class="scan-results" id="scan-results" style="display: none;">
+                <h4 style="margin-top:0; color:var(--primary); font-size:0.88rem; font-weight:800; border-bottom:1.5px solid #eee; padding-bottom:8px; text-transform:uppercase;">Kết Quả Phân Tích Da Bằng AI</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:12px;">
+                    <div>
+                        <div style="font-size:0.75rem; color:#666; font-weight:600;">Chỉ số bã nhờn (Sebum):</div>
+                        <div style="font-size:1.05rem; font-weight:800; color:#e67e22;" id="sebum-level">Khá cao (75%)</div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.75rem; color:#666; font-weight:600;">Độ ẩm biểu bì (Hydration):</div>
+                        <div style="font-size:1.05rem; font-weight:800; color:#3498db;" id="moisture-level">Thiếu nước (42%)</div>
+                    </div>
+                </div>
+                <div style="margin-top:15px; background:var(--primary-light); padding:10px; border-radius:8px; border:1px solid rgba(255,74,125,0.15);">
+                    <div style="font-size:0.75rem; color:var(--primary-dark); font-weight:700; text-transform:uppercase;">Kết luận phân loại da:</div>
+                    <div style="font-size:0.95rem; font-weight:800; color:var(--secondary); margin-top:3px;" id="skin-verdict">DA DẦU (Oily Skin)</div>
+                    <p style="font-size:0.75rem; color:#555; margin-top:5px; line-height:1.4;">Tuyến bã nhờn vùng chữ T hoạt động mạnh. Khuyên dùng các sản phẩm chiết xuất trà xanh, chứa BHA kiềm dầu.</p>
+                </div>
+                <button class="btn-apply-ai-filter" onclick="applyAISkinFilter()">Áp Dụng Bộ Lọc & Tìm Sản Phẩm Phù Hợp</button>
+            </div>
+        </div>
+    </div>
+    <div class="floating-chat-btn" id="chat-toggle-btn" onclick="toggleChatWidget()" title="Trợ lý ảo hỗ trợ">
+        <span class="material-icons" id="chat-icon-indicator" style="font-size: 1.6rem; color: white;">smart_toy</span>
+    </div>
+
+    <div class="chat-widget-window" id="chat-widget-window">
+        <div class="chat-widget-header">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="material-icons" style="color: var(--primary); font-size: 1.3rem;">smart_toy</span>
+                <div>
+                    <h4 style="margin:0; font-size:0.85rem; font-weight:800; color:var(--secondary);">Trợ Lý Ảo THE BEAUTY</h4>
+                    <span style="font-size:0.65rem; color:#444; font-weight:600; margin-left: 2px;"><span class="chat-status-dot"></span>Đang hoạt động</span>
+                </div>
+            </div>
+            <span class="material-icons close-chat-widget" onclick="toggleChatWidget()" style="cursor: pointer; font-size: 1.2rem;">close</span>
+        </div>
+        <div class="chat-widget-messages" id="chat-messages">
+            <div class="chat-bubble assistant">
+                Xin chào! 👋 Tôi là trợ lý ảo The Beauty. Tôi có thể giúp gì cho bạn hôm nay?
+            </div>
+            <div class="chat-bubble assistant">
+                Hãy click chọn nhanh các chủ đề bên dưới hoặc nhắn câu hỏi của bạn nhé:
+            </div>
+        </div>
+        <div class="chat-widget-suggests">
+            <button class="chat-suggest-chip" onclick="handleSuggestClick('Tư vấn sản phẩm cho Da Dầu')">Da Dầu</button>
+            <button class="chat-suggest-chip" onclick="handleSuggestClick('Tư vấn sản phẩm cho Da Khô')">Da Khô</button>
+            <button class="chat-suggest-chip" onclick="handleSuggestClick('Chính sách đổi trả hàng thế nào?')">Đổi trả hàng</button>
+            <button class="chat-suggest-chip" onclick="handleSuggestClick('Gặp nhân viên tư vấn')">💬 Chat với Admin</button>
+        </div>
+        <form class="chat-widget-input-area" id="chat-input-form" onsubmit="handleChatSubmit(event)">
+            <input type="text" id="chat-input-field" placeholder="Nhập câu hỏi của bạn..." autocomplete="off">
+            <button type="submit" class="chat-send-btn">
+                <span class="material-icons" style="font-size: 1.1rem; color: white;">send</span>
+            </button>
+        </form>
+    </div>
+        <!-- Firebase Compat SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        let products = JSON.parse(localStorage.getItem('productsDatabase')) || [];
+
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let selectedSkinTypes = [];
+        window.compareList = [];
+        function kiemTraLoaiDaPhuHop(product, selectedSkins) {
+            if (selectedSkins.length === 0) {
+                return true;
+            }
+            
+            const prodSkins = product.skinTypes || ["mọi loại da"];
+            if (prodSkins.includes("mọi loại da")) {
+                return true;
+            }
+            for (let i = 0; i < selectedSkins.length; i++) {
+                let currentSkin = selectedSkins[i];
+                if (prodSkins.includes(currentSkin)) {
+                    return true; // Khớp ít nhất một loại da được chọn
+                }
+            }
+            return false;
+        }
+
+        function renderProducts() {
+            products = JSON.parse(localStorage.getItem('productsDatabase')) || [];
+            window.products = products;
+            const productList = document.getElementById('product-list');
+            if (!productList) return;
+
+            let filtered = products;
+            if (activeCategory !== 'all') {
+                if (activeCategory === 'sale') {
+                    filtered = products.filter(p => p.oldPrice && p.oldPrice > p.price);
+                } else if (activeCategory === 'body') {
+                    filtered = products.filter(p => p.category === 'Body' || p.category === 'Chăm sóc da');
+                } else if (activeCategory === 'online') {
+                    filtered = products.filter(p => p.id === 'p3'); // Special online deal
+                } else {
+                    filtered = products.filter(product => product.category === activeCategory);
+                }
+            }
+            if (searchQuery.trim() !== '') {
+                const query = searchQuery.toLowerCase().trim();
+                filtered = filtered.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            }
+            filtered = filtered.filter(product => kiemTraLoaiDaPhuHop(product, selectedSkinTypes));
+            if (window.maxFilterPrice) {
+                filtered = filtered.filter(p => p.price <= window.maxFilterPrice);
+            }
+            if (window.selectedFilterBrands && window.selectedFilterBrands.length > 0) {
+                filtered = filtered.filter(p => window.selectedFilterBrands.includes(p.brand));
+            }
+
+            if (filtered.length === 0) {
+                productList.innerHTML = `<div class="p-empty" style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0; font-size: 1rem; font-style: italic;">Không tìm thấy sản phẩm nào phù hợp với bộ lọc hoặc từ khóa.</div>`;
+                return;
+            }
+
+            productList.innerHTML = filtered.map(product => {
+                const isFavorite = window.wishlistManager ? window.wishlistManager.isFavorite(product.id) : false;
+                const favIcon = isFavorite ? 'favorite' : 'favorite_border';
+                const activeClass = isFavorite ? 'active' : '';
+                
+                const stockText = product.stock !== undefined ? product.stock : 50;
+                const isOutOfStock = stockText <= 0;
+                
+                const btnHtml = isOutOfStock 
+                    ? `<button class="add-to-cart-btn" disabled style="background:#d2d2d2; color:#fff; cursor:not-allowed; border-color:#d2d2d2; box-shadow:none;">Hết hàng</button>`
+                    : `<button class="add-to-cart-btn" onclick="window.cartManager.addItem({id:'${product.id}', title:'${product.title}', price:${product.price}, img:'${product.img}'})">Thêm vào giỏ hàng</button>`;
+                
+                const stockBadge = isOutOfStock 
+                    ? `<span style="position:absolute; top:12px; left:12px; background:#e74c3c; color:white; padding:4px 8px; font-size:0.7rem; border-radius:4px; font-weight:700; text-transform:uppercase; z-index:5; pointer-events:none;">Hết hàng</span>`
+                    : ``;
+
+                const isCompared = window.compareList.includes(product.id);
+                const compareCbHtml = `
+                    <div style="margin-bottom: 0.8rem;">
+                        <label class="product-compare-label" onclick="event.stopPropagation();">
+                            <input type="checkbox" class="product-compare-cb" value="${product.id}" onchange="toggleCompare(this, '${product.id}')" ${isCompared ? 'checked' : ''}>
+                            So sánh sản phẩm
+                        </label>
+                    </div>
+                `;
+
+                return `
+                    <div class="product-card" onclick="window.quickViewManager.open('${product.id}')" style="cursor: pointer;">
+                        <div class="product-img" style="position:relative;">
+                            <img src="${product.img}" alt="${product.title}">
+                            <button class="quick-view-btn" onclick="event.stopPropagation(); window.quickViewManager.open('${product.id}')">Xem nhanh</button>
+                            <button class="wishlist-btn ${activeClass}" onclick="event.stopPropagation(); window.wishlistManager.toggleItem('${product.id}')">
+                                <span class="material-icons">${favIcon}</span>
+                            </button>
+                            ${stockBadge}
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">${product.category}</div>
+                            <div class="product-title">${product.title}</div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                                ${product.oldPrice && product.oldPrice > product.price 
+                                    ? `<div style="display:flex; flex-direction:column; gap:1px; line-height:1.2;">
+                                         <span style="font-size:0.75rem; color:#888; text-decoration:line-through; font-weight:500;">${new Intl.NumberFormat('vi-VN').format(product.oldPrice)} ₫</span>
+                                         <span class="product-price" style="margin-bottom:0; font-size:1.05rem; color:var(--primary);">${new Intl.NumberFormat('vi-VN').format(product.price)} ₫</span>
+                                       </div>`
+                                    : `<div class="product-price" style="margin-bottom:0; font-size:1.05rem;">${new Intl.NumberFormat('vi-VN').format(product.price)} ₫</div>`
+                                }
+                                <div style="font-size:0.78rem; color:#888;">Còn lại: <strong style="color:var(--secondary);">${stockText}</strong></div>
+                            </div>
+                            ${compareCbHtml}
+                            ${btnHtml}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.renderProducts = renderProducts;
+        window.products = products;
+
+        function filterCategory(catName) {
+            activeCategory = catName;
+            renderProducts();
+            document.querySelectorAll('.capsule-item').forEach(el => {
+                el.style.transform = '';
+                el.style.boxShadow = '';
+            });
+            const activeEl = Array.from(document.querySelectorAll('.capsule-item')).find(el => el.textContent.includes(catName.substring(0,5)) || (catName==='all' && el.textContent==='Thương hiệu') || (catName==='sale' && el.textContent.includes('Khuyến mãi')) || (catName==='online' && el.textContent.includes('Online')));
+            if (activeEl) {
+                activeEl.style.transform = 'translateY(-2px) scale(1.02)';
+                activeEl.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
+            }
+            const productsSection = document.getElementById('products');
+            if (productsSection) {
+                const headerOffset = 180; // Total header height (170px) + extra breathing room
+                const elementPosition = productsSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        window.filterCategory = filterCategory;
+        function toggleSkinFilter() {
+            const panel = document.getElementById('skin-filter-panel');
+            if (panel) {
+                panel.classList.toggle('active');
+            }
+        }
+        window.toggleSkinFilter = toggleSkinFilter;
+
+        function applySkinFilters() {
+            selectedSkinTypes = [];
+            document.querySelectorAll('.skin-checkbox-input:checked').forEach(cb => {
+                selectedSkinTypes.push(cb.value);
+            });
+            renderProducts();
+        }
+        window.applySkinFilters = applySkinFilters;
+
+        function clearSkinFilters() {
+            document.querySelectorAll('.skin-checkbox-input').forEach(cb => {
+                cb.checked = false;
+            });
+            selectedSkinTypes = [];
+            renderProducts();
+        }
+        window.clearSkinFilters = clearSkinFilters;
+        function toggleCompare(cb, prodId) {
+            if (cb.checked) {
+                if (window.compareList.length >= 2) {
+                    alert("Bạn chỉ có thể chọn tối đa 2 sản phẩm để so sánh!");
+                    cb.checked = false;
+                    return;
+                }
+                window.compareList.push(prodId);
+            } else {
+                window.compareList = window.compareList.filter(id => id !== prodId);
+            }
+            renderCompareBar();
+        }
+        window.toggleCompare = toggleCompare;
+
+        function removeCompareItem(prodId) {
+            window.compareList = window.compareList.filter(id => id !== prodId);
+            const cbs = document.querySelectorAll(`.product-compare-cb[value="${prodId}"]`);
+            cbs.forEach(cb => cb.checked = false);
+            
+            renderCompareBar();
+        }
+        window.removeCompareItem = removeCompareItem;
+
+        function clearCompareList() {
+            window.compareList = [];
+            document.querySelectorAll('.product-compare-cb').forEach(cb => cb.checked = false);
+            renderCompareBar();
+        }
+        window.clearCompareList = clearCompareList;
+
+        function renderCompareBar() {
+            const bar = document.getElementById('compare-bar');
+            const slotsContainer = document.getElementById('compare-slots');
+            if (!bar || !slotsContainer) return;
+            
+            if (window.compareList.length > 0) {
+                bar.classList.add('active');
+            } else {
+                bar.classList.remove('active');
+            }
+            
+            let html = '';
+            for (let i = 0; i < 2; i++) {
+                if (i < window.compareList.length) {
+                    const prodId = window.compareList[i];
+                    const prod = window.products.find(p => p.id === prodId);
+                    if (prod) {
+                        html += `
+                            <div class="compare-slot">
+                                <img src="${prod.img}" alt="${prod.title}">
+                                <div class="compare-slot-title" title="${prod.title}">${prod.title}</div>
+                                <span class="remove-compare-slot" onclick="removeCompareItem('${prod.id}')">&times;</span>
+                            </div>
+                        `;
+                    }
+                } else {
+                    html += `
+                        <div class="compare-slot-empty">
+                            Slot ${i + 1} trống
+                        </div>
+                    `;
+                }
+            }
+            slotsContainer.innerHTML = html;
+        }
+        window.renderCompareBar = renderCompareBar;
+
+        function openCompareModal() {
+            if (window.compareList.length < 2) {
+                alert("Vui lòng chọn đủ 2 sản phẩm để tiến hành so sánh!");
+                return;
+            }
+            
+            const prodA = window.products.find(p => p.id === window.compareList[0]);
+            const prodB = window.products.find(p => p.id === window.compareList[1]);
+            
+            if (!prodA || !prodB) return;
+            
+            const table = document.getElementById('compare-table');
+            const analysisBox = document.getElementById('compare-analysis-box');
+            if (!table || !analysisBox) return;
+            
+            const brandA = prodA.brand || "The Beauty";
+            const brandB = prodB.brand || "The Beauty";
+            
+            const skinsA = (prodA.skinTypes || ["mọi loại da"]).map(s => `<span class="compare-table-skin-tag">${s}</span>`).join(' ');
+            const skinsB = (prodB.skinTypes || ["mọi loại da"]).map(s => `<span class="compare-table-skin-tag">${s}</span>`).join(' ');
+            
+            const descA = prodA.description || "Sản phẩm chăm sóc sắc đẹp chính hãng chất lượng cao.";
+            const descB = prodB.description || "Sản phẩm chăm sóc sắc đẹp chính hãng chất lượng cao.";
+
+            table.innerHTML = `
+                <tr>
+                    <td>Tiêu chí</td>
+                    <td><strong>Sản phẩm A</strong></td>
+                    <td><strong>Sản phẩm B</strong></td>
+                </tr>
+                <tr>
+                    <td>Hình ảnh</td>
+                    <td><img src="${prodA.img}" class="compare-table-img" alt="${prodA.title}"></td>
+                    <td><img src="${prodB.img}" class="compare-table-img" alt="${prodB.title}"></td>
+                </tr>
+                <tr>
+                    <td>Tên sản phẩm</td>
+                    <td><div class="compare-table-title">${prodA.title}</div></td>
+                    <td><div class="compare-table-title">${prodB.title}</div></td>
+                </tr>
+                <tr>
+                    <td>Thương hiệu</td>
+                    <td><span class="compare-table-brand">${brandA}</span></td>
+                    <td><span class="compare-table-brand">${brandB}</span></td>
+                </tr>
+                <tr>
+                    <td>Đơn giá</td>
+                    <td><span class="compare-table-price">${new Intl.NumberFormat('vi-VN').format(prodA.price)} ₫</span></td>
+                    <td><span class="compare-table-price">${new Intl.NumberFormat('vi-VN').format(prodB.price)} ₫</span></td>
+                </tr>
+                <tr>
+                    <td>Loại da phù hợp</td>
+                    <td><div class="compare-table-skins">${skinsA}</div></td>
+                    <td><div class="compare-table-skins">${skinsB}</div></td>
+                </tr>
+                <tr>
+                    <td>Công dụng / Mô tả</td>
+                    <td><p style="text-align:left; color:#555; font-size:0.82rem; margin:0;">${descA}</p></td>
+                    <td><p style="text-align:left; color:#555; font-size:0.82rem; margin:0;">${descB}</p></td>
+                </tr>
+            `;
+            let gapText = "";
+            if (prodA.price < prodB.price) {
+                let diff = prodB.price - prodA.price;
+                let formattedDiff = new Intl.NumberFormat('vi-VN').format(diff) + ' ₫';
+                gapText = `<strong>Phân tích:</strong> Sản phẩm A ("${prodA.title}") có giá bán rẻ hơn Sản phẩm B ("${prodB.title}") là <strong>${formattedDiff}</strong> (Giúp bạn tiết kiệm chi phí mua sắm hơn).`;
+            } else if (prodA.price > prodB.price) {
+                let diff = prodA.price - prodB.price;
+                let formattedDiff = new Intl.NumberFormat('vi-VN').format(diff) + ' ₫';
+                gapText = `<strong>Phân tích:</strong> Sản phẩm B ("${prodB.title}") có giá bán rẻ hơn Sản phẩm A ("${prodA.title}") là <strong>${formattedDiff}</strong> (Giúp bạn tiết kiệm chi phí mua sắm hơn).`;
+            } else {
+                gapText = `<strong>Phân tích:</strong> Cả hai sản phẩm đều đồng giá <strong>${new Intl.NumberFormat('vi-VN').format(prodA.price)} ₫</strong>.`;
+            }
+            
+            analysisBox.innerHTML = gapText;
+            document.getElementById('compare-modal-overlay').classList.add('active');
+        }
+        window.openCompareModal = openCompareModal;
+
+        function closeCompareModal() {
+            document.getElementById('compare-modal-overlay').classList.remove('active');
+        }
+        window.closeCompareModal = closeCompareModal;
+        const articlesDB = [
+            {
+                id: 'a1',
+                tag: 'Xu hướng',
+                title: 'Top 5 Dòng Son Trendy Dự Đoán Sẽ Gây Bão Hè 2026',
+                date: '03/06/2026',
+                author: 'Ban Biên Tập The Beauty',
+                img: 'images/brand_story_img_1776407208755.png',
+                content: `
+                    <p>Hè 2026 chứng kiến sự lên ngôi của các dòng son bóng nhẹ, tự nhiên mang lại hiệu ứng căng mọng ngọt ngào như những quả cherry chín mọng. Xu hướng trang điểm năm nay tập trung vào làn da căng bóng tự nhiên kết hợp cùng đôi môi mọng nước tràn đầy năng lượng.</p>
+                    <p>Các tông màu được dự đoán sẽ dẫn đầu bảng xếp hạng bao gồm đỏ cherry, cam đào san hô, hồng đất nhẹ nhàng và màu mận chín quyến rũ. Điều đặc biệt là các dòng son năm nay đều bổ sung độ dưỡng cực cao, vừa giúp dưỡng ẩm tối đa vừa không gây bết dính.</p>
+                    <p><strong>Bí quyết đánh son lâu trôi ngày hè:</strong> Hãy thoa một lớp son tint nhẹ làm nền, sau đó dặm một lớp phấn phủ không màu lên môi trước khi tô lớp son bóng Peripera cuối cùng để tạo độ bám tối đa.</p>
+                `,
+                relatedCategory: 'Trang điểm'
+            },
+            {
+                id: 'a2',
+                tag: 'Chăm sóc da',
+                title: 'Quy Trình 4 Bước Dưỡng Sáng Da Mờ Thâm Sau 2 Tuần',
+                date: '01/06/2026',
+                author: 'Dr. Thùy Linh (Dermatologist)',
+                img: 'images/luxury_serum_1776404500065.png',
+                content: `
+                    <p>Mùa hè oi bức kèm theo tia UV gay gắt là nguyên nhân hàng đầu khiến da sạm đen, xuất hiện vết thâm mụn và tàn nhang. Để cải thiện tông da và phục hồi vẻ rạng rỡ sau 2 tuần, bạn cần một quy trình dưỡng da khoa học tập trung vào việc làm sạch và tái tạo tế bào.</p>
+                    <p><strong>Bước 1: Làm sạch sâu (Double Cleansing)</strong> - Sử dụng nước tẩy trang dịu nhẹ sau đó rửa mặt sạch với sữa rửa mặt Calendula để loại bỏ hoàn toàn bã nhờn tích tụ.</p>
+                    <p><strong>Bước 2: Cân bằng và Phục hồi</strong> - Vỗ nhẹ nước hoa hồng hoặc tinh chất phục hồi để làm dịu các vùng da cháy nắng.</p>
+                    <p><strong>Bước 3: Tinh chất đặc trị Vitamin C</strong> - Đây là bước cốt lõi. Sử dụng tinh chất Vitamin C quýt xanh giúp ức chế hắc tố melanin, làm mờ vết thâm hiệu quả.</p>
+                    <p><strong>Bước 4: Khóa ẩm & Chống nắng</strong> - Thoa kem dưỡng ẩm mỏng nhẹ vào ban đêm và đừng quên kem chống nắng SPF 50+ vào ban ngày.</p>
+                `,
+                relatedCategory: 'Chăm sóc da'
+            },
+            {
+                id: 'a3',
+                tag: 'Bí quyết làm đẹp',
+                title: 'Hướng Dẫn Chọn Kem Dưỡng Phù Hợp Cho Từng Loại Da',
+                date: '28/05/2026',
+                author: 'Beauty Blogger Tracy Trịnh',
+                img: 'images/skincare_cream_1776407395965.png',
+                content: `
+                    <p>Kem dưỡng ẩm là bước bắt buộc trong mọi quy trình chăm sóc da. Tuy nhiên, việc lựa chọn sai kết cấu kem dưỡng có thể gây bít tắc lỗ chân lông dẫn đến mụn hoặc khiến da bị thiếu nước trầm trọng.</p>
+                    <p><strong>1. Đối với Da Dầu:</strong> Ưu tiên các dòng kem dưỡng dạng gel hoặc lotion mỏng nhẹ, thấm nhanh và có nhãn "oil-free" (không chứa dầu). Hãy tìm kiếm các sản phẩm chứa trà xanh hoặc HA cấp nước.</p>
+                    <p><strong>2. Đối với Da Khô:</strong> Chọn kem dưỡng dạng Cream (kem đặc) giàu chất dưỡng ẩm như Ceramide, bơ hạt mỡ giúp phục hồi màng ẩm bảo vệ da bị tổn thương.</p>
+                    <p><strong>3. Đối với Da Nhạy Cảm:</strong> Chọn các sản phẩm không chứa cồn khô, hương liệu nhân tạo hay chất bảo quản parabens. Chiết xuất từ hoa cúc là lựa chọn tuyệt vời.</p>
+                `,
+                relatedCategory: 'Chăm sóc da'
+            }
+        ];
+
+        function openArticleModal(articleId) {
+            const article = articlesDB.find(a => a.id === articleId);
+            if (!article) return;
+            
+            document.getElementById('article-detail-tag').textContent = article.tag;
+            document.getElementById('article-detail-title').textContent = article.title;
+            document.getElementById('article-detail-meta').textContent = `Đăng ngày ${article.date} bởi ${article.author}`;
+            document.getElementById('article-detail-img').src = article.img;
+            document.getElementById('article-detail-text').innerHTML = article.content;
+            const relatedGrid = document.getElementById('article-related-grid');
+            if (relatedGrid) {
+                const dbProducts = JSON.parse(localStorage.getItem('productsDatabase')) || [];
+                const relatedProds = dbProducts
+                    .filter(p => p.category === article.relatedCategory && p.stock > 0)
+                    .slice(0, 3);
+                    
+                if (relatedProds.length === 0) {
+                    relatedGrid.innerHTML = '<div style="grid-column:1/-1; font-size:0.8rem; color:#888; font-style:italic; padding:10px 0;">Hiện không có sản phẩm liên quan nào khả dụng trong kho.</div>';
+                } else {
+                    relatedGrid.innerHTML = relatedProds.map(prod => `
+                        <div class="related-card">
+                            <img src="${prod.img}" alt="${prod.title}">
+                            <div class="related-title" title="${prod.title}">${prod.title}</div>
+                            <div class="related-price">${new Intl.NumberFormat('vi-VN').format(prod.price)} ₫</div>
+                            <button class="related-add-btn" onclick="window.cartManager.addItem({id:'${prod.id}', title:'${prod.title}', price:${prod.price}, img:'${prod.img}'}); closeArticleModal();">Mua Ngay</button>
+                        </div>
+                    `).join('');
+                }
+            }
+            
+            document.getElementById('article-modal-overlay').classList.add('active');
+        }
+        window.openArticleModal = openArticleModal;
+
+        function closeArticleModal() {
+            document.getElementById('article-modal-overlay').classList.remove('active');
+        }
+        window.closeArticleModal = closeArticleModal;
+        let chatPollInterval = null;
+        let lastMessageCount = 0;
+
+        function getChatUserEmail() {
+            let email = localStorage.getItem('loggedInEmail');
+            if (!email) {
+                email = sessionStorage.getItem('chatGuestEmail');
+                if (!email) {
+                    const guestId = Math.floor(100000 + Math.random() * 900000);
+                    email = `guest_${guestId}@guest.bloombeauty.vn`;
+                    sessionStorage.setItem('chatGuestEmail', email);
+                    sessionStorage.setItem('chatGuestName', `Khách vãng lai #${guestId}`);
+                }
+            }
+            return email;
+        }
+
+        function getChatUserName() {
+            const email = getChatUserEmail();
+            if (email.startsWith('guest_')) {
+                return sessionStorage.getItem('chatGuestName') || 'Khách vãng lai';
+            }
+            const usersDB = JSON.parse(localStorage.getItem('usersDatabase')) || [];
+            const user = usersDB.find(u => u.email === email);
+            return user ? user.name : 'Khách hàng';
+        }
+
+        function saveChatMessage(sender, text) {
+            let chatMessages = JSON.parse(localStorage.getItem('chatMessagesDatabase')) || [];
+            let email = getChatUserEmail();
+            let name = getChatUserName();
+            
+            const newMsg = {
+                id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                sender: sender,
+                userEmail: email,
+                userName: name,
+                text: text,
+                timestamp: Date.now(),
+                dateStr: new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'})
+            };
+            
+            chatMessages.push(newMsg);
+            localStorage.setItem('chatMessagesDatabase', JSON.stringify(chatMessages));
+            return newMsg;
+        }
+
+        function loadAndRenderChatHistory() {
+            const email = getChatUserEmail();
+            const allMessages = JSON.parse(localStorage.getItem('chatMessagesDatabase')) || [];
+            const myMessages = allMessages.filter(m => m.userEmail === email);
+            
+            const msgsContainer = document.getElementById('chat-messages');
+            if (!msgsContainer) return;
+            
+            if (myMessages.length !== lastMessageCount) {
+                if (myMessages.length === 0) {
+                    msgsContainer.innerHTML = `
+                        <div class="chat-bubble assistant">
+                            Xin chào! 👋 Tôi là trợ lý ảo The Beauty. Tôi có thể giúp gì cho bạn hôm nay?
+                        </div>
+                        <div class="chat-bubble assistant">
+                            Hãy click chọn nhanh các chủ đề bên dưới hoặc nhắn câu hỏi của bạn nhé:
+                        </div>
+                    `;
+                } else {
+                    msgsContainer.innerHTML = myMessages.map(m => {
+                        let bubbleClass = m.sender;
+                        let prefix = '';
+                        if (m.sender === 'admin') {
+                            bubbleClass = 'assistant';
+                            prefix = '<strong style="color: var(--primary); display:block; margin-bottom:3px; font-size:0.72rem;"><i class="fas fa-user-tie"></i> Quản Trị Viên</strong>';
+                        } else if (m.sender === 'assistant') {
+                            bubbleClass = 'assistant';
+                        } else {
+                            bubbleClass = 'user';
+                        }
+                        return `<div class="chat-bubble ${bubbleClass}">${prefix}${m.text}</div>`;
+                    }).join('');
+                }
+                
+                msgsContainer.scrollTop = msgsContainer.scrollHeight;
+                lastMessageCount = myMessages.length;
+            }
+        }
+
+        function startChatPolling() {
+            if (chatPollInterval) clearInterval(chatPollInterval);
+            chatPollInterval = setInterval(() => {
+                loadAndRenderChatHistory();
+            }, 1500);
+        }
+
+        function stopChatPolling() {
+            if (chatPollInterval) {
+                clearInterval(chatPollInterval);
+                chatPollInterval = null;
+            }
+        }
+
+        function toggleChatWidget() {
+            const widget = document.getElementById('chat-widget-window');
+            if (widget) {
+                widget.classList.toggle('active');
+                if (widget.classList.contains('active')) {
+                    loadAndRenderChatHistory();
+                    startChatPolling();
+                    const msgs = document.getElementById('chat-messages');
+                    setTimeout(() => { msgs.scrollTop = msgs.scrollHeight; }, 100);
+                } else {
+                    stopChatPolling();
+                }
+            }
+        }
+        window.toggleChatWidget = toggleChatWidget;
+
+        function handleSuggestClick(question) {
+            saveChatMessage('user', question);
+            loadAndRenderChatHistory();
+            setTimeout(() => {
+                getBotResponse(question);
+            }, 500);
+        }
+        window.handleSuggestClick = handleSuggestClick;
+
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-input-field');
+            if (!input || input.value.trim() === '') return;
+            
+            const question = input.value.trim();
+            saveChatMessage('user', question);
+            loadAndRenderChatHistory();
+            input.value = '';
+            
+            setTimeout(() => {
+                getBotResponse(question);
+            }, 600);
+        }
+        window.handleChatSubmit = handleChatSubmit;
+
+        function getBotResponse(question) {
+            const query = question.toLowerCase();
+            let reply = "";
+            
+            if (query.includes("nhân viên") || query.includes("admin") || query.includes("hỗ trợ") || query.includes("gặp")) {
+                reply = "Dạ, tôi đã chuyển thông báo đến chuyên viên hỗ trợ. Bạn vui lòng nhắn tin trực tiếp tại đây, chuyên viên sẽ trả lời bạn ngay nhé! 💖";
+            }
+            else if (query.includes("dầu") || query.includes("oily")) {
+                const dbProds = JSON.parse(localStorage.getItem('productsDatabase')) || [];
+                const matched = dbProds.filter(p => p.skinTypes && p.skinTypes.includes("dầu")).slice(0, 2);
+                
+                reply = "Đối với <strong>Da dầu</strong>, bạn cần các sản phẩm kiềm dầu, làm sạch sâu lỗ chân lông. ";
+                if (matched.length > 0) {
+                    reply += "Tôi gợi ý cho bạn:<br>" + matched.map(p => `- <strong>${p.title}</strong> (${new Intl.NumberFormat('vi-VN').format(p.price)} ₫)`).join('<br>');
+                } else {
+                    reply += "Hãy tham khảo Serum Trà Xanh hoặc Sữa Rửa Mặt Thảo Mộc Calendula nhé.";
+                }
+            }
+            else if (query.includes("khô") || query.includes("dry")) {
+                const dbProds = JSON.parse(localStorage.getItem('productsDatabase')) || [];
+                const matched = dbProds.filter(p => p.skinTypes && p.skinTypes.includes("khô")).slice(0, 2);
+                
+                reply = "Với làn <strong>Da khô</strong>, bạn nên sử dụng sản phẩm cấp ẩm sâu và chứa dưỡng chất phục hồi. ";
+                if (matched.length > 0) {
+                    reply += "Sản phẩm khuyên dùng:<br>" + matched.map(p => `- <strong>${p.title}</strong> (${new Intl.NumberFormat('vi-VN').format(p.price)} ₫)`).join('<br>');
+                } else {
+                    reply += "Xem ngay Kem Dưỡng Ẩm Aqua Cream hoặc Tinh Chất Phục Hồi Miracle Essence.";
+                }
+            }
+            else if (query.includes("nhạy cảm") || query.includes("sensitive")) {
+                reply = "<strong>Da nhạy cảm</strong> cần các sản phẩm dịu nhẹ không hương liệu và cồn. Bạn có thể sử dụng <em>Sữa Rửa Mặt Calendula</em> hoặc <em>Tinh Chất Phục Hồi Miracle Essence</em> để giảm kích ứng.";
+            }
+            else if (query.includes("hỗn hợp") || query.includes("combination")) {
+                reply = "<strong>Da hỗn hợp</strong> cần cân bằng ẩm vùng chữ U và kiềm dầu vùng chữ T. Các sản phẩm như <em>Kem Dưỡng Ẩm Aqua Cream</em> hoặc <em>Serum Trà Xanh</em> cực kỳ thích hợp.";
+            }
+            else if (query.includes("đổi trả") || query.includes("hoàn tiền") || query.includes("trả hàng")) {
+                reply = "Chính sách đổi trả của <strong>The Beauty</strong>: Bạn được đổi trả sản phẩm hoàn toàn miễn phí trong vòng <strong>7 ngày</strong> kể từ khi nhận hàng nếu phát hiện sản phẩm lỗi từ nhà sản xuất hoặc có dị ứng kích ứng da (kèm giấy chứng nhận y tế).";
+            }
+            else if (query.includes("cửa hàng") || query.includes("địa chỉ") || query.includes("shop")) {
+                reply = "Hệ thống cửa hàng <strong>The Beauty</strong> trên toàn quốc:<br>" +
+                        "- <strong>Chùa Bộc:</strong> 12 Chùa Bộc, Đống Đa, TP.HN<br>" +
+                        "- <strong>Vincom Bà Triệu:</strong> 191 Bà Triệu, Hai Bà Trưng, Hà Nội<br>" +
+                        "- <strong>Lê Duẩn:</strong> 456 Lê Duẩn, Thanh Khê, Đà Nẵng.";
+            }
+            else {
+                reply = "Cảm ơn bạn đã trò chuyện! Để được tư vấn chi tiết hơn, bạn có thể gọi hotline <strong>0888300368</strong> hoặc nhắn tin hỏi bất kỳ điều gì tại đây, chuyên viên tư vấn sẽ hỗ trợ bạn sớm nhất nhé. 💖";
+            }
+            
+            saveChatMessage('assistant', reply);
+            loadAndRenderChatHistory();
+        }
+        let webcamStream = null;
+        let detectedSkinVerdict = "dầu";
+
+        function openFaceAI() {
+            document.getElementById('face-ai-overlay').classList.add('active');
+            
+            const video = document.getElementById('webcam');
+            const status = document.getElementById('scanner-status');
+            const sampleImg = document.getElementById('sample-face');
+            
+            video.style.display = 'block';
+            sampleImg.style.display = 'none';
+            status.textContent = 'Đang kết nối camera...';
+
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+                .then(stream => {
+                    webcamStream = stream;
+                    video.srcObject = stream;
+                    status.textContent = 'Camera sẵn sàng';
+                })
+                .catch(err => {
+                    console.log("Webcam blocked/not available: ", err);
+                    useSampleImage();
+                });
+        }
+        window.openFaceAI = openFaceAI;
+
+        function useSampleImage() {
+            const video = document.getElementById('webcam');
+            const sampleImg = document.getElementById('sample-face');
+            const status = document.getElementById('scanner-status');
+            
+            if (webcamStream) {
+                webcamStream.getTracks().forEach(track => track.stop());
+                webcamStream = null;
+            }
+            
+            video.style.display = 'none';
+            sampleImg.style.display = 'block';
+            status.textContent = 'Sử dụng ảnh mẫu';
+        }
+        window.useSampleImage = useSampleImage;
+
+        let scanAnimFrame = null;
+        function closeFaceAI() {
+            if (webcamStream) {
+                webcamStream.getTracks().forEach(track => track.stop());
+                webcamStream = null;
+            }
+            if (scanAnimFrame) {
+                cancelAnimationFrame(scanAnimFrame);
+                scanAnimFrame = null;
+            }
+            const canvas = document.getElementById('face-mesh-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            document.getElementById('scanner-hud-left').style.display = 'none';
+            document.getElementById('scanner-hud-right').style.display = 'none';
+            
+            document.getElementById('face-ai-overlay').classList.remove('active');
+            document.getElementById('scan-line').classList.remove('scanning');
+            document.getElementById('scan-results').style.display = 'none';
+            document.getElementById('start-scan-btn').disabled = false;
+            document.getElementById('start-scan-btn').textContent = 'Bắt Đầu Phân Tích Da';
+        }
+        window.closeFaceAI = closeFaceAI;
+
+        function startSkinScan() {
+            const scanLine = document.getElementById('scan-line');
+            const status = document.getElementById('scanner-status');
+            const startBtn = document.getElementById('start-scan-btn');
+            const canvas = document.getElementById('face-mesh-canvas');
+            const hudLeft = document.getElementById('scanner-hud-left');
+            const hudRight = document.getElementById('scanner-hud-right');
+            const ctx = canvas.getContext('2d');
+            
+            startBtn.disabled = true;
+            startBtn.textContent = 'Đang quét khuôn mặt...';
+            status.textContent = 'Đang phân tích cấu trúc da mặt...';
+            scanLine.classList.add('scanning');
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            hudLeft.style.display = 'block';
+            hudRight.style.display = 'block';
+            const w = canvas.width;
+            const h = canvas.height;
+            const facePoints = [
+                {x: w * 0.5, y: h * 0.22}, // forehead
+                {x: w * 0.38, y: h * 0.36}, // left eye
+                {x: w * 0.62, y: h * 0.36}, // right eye
+                {x: w * 0.5, y: h * 0.5}, // nose
+                {x: w * 0.5, y: h * 0.66}, // mouth
+                {x: w * 0.5, y: h * 0.8}, // chin
+                {x: w * 0.28, y: h * 0.5}, // left cheek
+                {x: w * 0.72, y: h * 0.5}, // right cheek
+                {x: w * 0.36, y: h * 0.72}, // left jaw
+                {x: w * 0.64, y: h * 0.72}  // right jaw
+            ];
+            
+            let progress = 0;
+            let logTimer = 0;
+            
+            function drawMesh() {
+                ctx.clearRect(0, 0, w, h);
+                progress += 0.9;
+                ctx.strokeStyle = 'rgba(255, 74, 125, 0.25)';
+                ctx.lineWidth = 1;
+                
+                for(let i = 0; i < facePoints.length; i++) {
+                    for(let j = i + 1; j < facePoints.length; j++) {
+                        const dist = Math.hypot(facePoints[i].x - facePoints[j].x, facePoints[i].y - facePoints[j].y);
+                        if (dist < w * 0.45) {
+                            ctx.beginPath();
+                            ctx.moveTo(facePoints[i].x, facePoints[i].y);
+                            ctx.lineTo(facePoints[j].x, facePoints[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                facePoints.forEach((pt, idx) => {
+                    ctx.fillStyle = '#ff4a7d';
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    const pulseRadius = 4 + (Math.sin(Date.now() * 0.01 + idx) + 1) * 5;
+                    ctx.strokeStyle = 'rgba(255, 74, 125, 0.35)';
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, pulseRadius, 0, Math.PI * 2);
+                    ctx.stroke();
+                });
+                logTimer++;
+                if (logTimer % 8 === 0) {
+                    hudLeft.innerHTML = `
+                        SYS: ONLINE<br>
+                        FPS: 60.00<br>
+                        SCAN: ACTIVE<br>
+                        PTS: 10/10<br>
+                        T-ZONE: SCANNING<br>
+                        U-ZONE: SCANNING<br>
+                        PROGRESS: ${Math.min(100, Math.floor(progress))}%
+                    `;
+                    
+                    const noise = Math.random().toFixed(2);
+                    hudRight.innerHTML = `
+                        GRID: DETECTED<br>
+                        BIOMETRIC: PASS<br>
+                        UV SENSORS: ON<br>
+                        SEBUM LEVEL: CALC<br>
+                        HYDRATION: CALC<br>
+                        STATUS: ANALYZING
+                    `;
+                }
+                
+                if (progress < 100) {
+                    scanAnimFrame = requestAnimationFrame(drawMesh);
+                }
+            }
+            
+            drawMesh();
+
+            setTimeout(() => {
+                status.textContent = 'Đang phân tích lượng dầu nhờn...';
+            }, 1000);
+
+            setTimeout(() => {
+                status.textContent = 'Đang đo lường độ ẩm tế bào...';
+            }, 2000);
+
+            setTimeout(() => {
+                cancelAnimationFrame(scanAnimFrame);
+                ctx.clearRect(0, 0, w, h);
+                hudLeft.style.display = 'none';
+                hudRight.style.display = 'none';
+                
+                scanLine.classList.remove('scanning');
+                status.textContent = 'Hoàn tất quét da!';
+                
+                const verdicts = [
+                    { type: 'dầu', name: 'DA DẦU (Oily Skin)', sebum: '78% (Cao)', hydration: '40% (Thiếu nước)', desc: 'Tuyến bã nhờn hoạt động mạnh tại vùng chữ T. Khuyên dùng các sản phẩm kiềm dầu, làm sạch sâu như Serum Trà Xanh.' },
+                    { type: 'khô', name: 'DA KHÔ (Dry Skin)', sebum: '22% (Thấp)', hydration: '33% (Rất khô)', desc: 'Hàng rào lipid bảo vệ da suy giảm làm mất nước. Khuyên dùng các loại kem khóa ẩm đặc như Aqua Cream.' },
+                    { type: 'hỗn hợp', name: 'DA HỖN HỢP (Combination)', sebum: '62% (Trung bình)', hydration: '45% (Bình thường)', desc: 'Vùng chữ T nhiều dầu nhưng hai vùng má lại bị khô ráp. Khuyên dùng kem dưỡng ẩm mỏng nhẹ cân bằng da.' },
+                    { type: 'nhạy cảm', name: 'DA NHẠY CẢM (Sensitive Skin)', sebum: '40% (Bình thường)', hydration: '50% (Bình thường)', desc: 'Da dễ bị kích ứng, mẩn đỏ khi thời tiết thay đổi. Khuyên dùng sản phẩm chiết xuất hoa cúc Calendula lành tính.' }
+                ];
+                
+                const result = verdicts[Math.floor(Math.random() * verdicts.length)];
+                detectedSkinVerdict = result.type;
+                
+                document.getElementById('sebum-level').textContent = result.sebum;
+                document.getElementById('moisture-level').textContent = result.hydration;
+                document.getElementById('skin-verdict').textContent = result.name;
+                document.getElementById('skin-verdict').nextElementSibling.textContent = result.desc;
+                
+                document.getElementById('scan-results').style.display = 'block';
+                startBtn.disabled = false;
+                startBtn.textContent = 'Quét Lại';
+                
+                ToastManager.show(`Phân tích thành công! Loại da của bạn: ${result.name}`, 'success');
+            }, 3000);
+        }
+        window.startSkinScan = startSkinScan;
+
+        function applyAISkinFilter() {
+            document.querySelectorAll('.skin-checkbox-input').forEach(cb => {
+                cb.checked = (cb.value === detectedSkinVerdict);
+            });
+            const panel = document.getElementById('skin-filter-panel');
+            if (panel && !panel.classList.contains('active')) {
+                panel.classList.add('active');
+            }
+            
+            selectedSkinTypes = [detectedSkinVerdict];
+            renderProducts();
+            closeFaceAI();
+            const grid = document.getElementById('products');
+            if (grid) {
+                grid.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        window.applyAISkinFilter = applyAISkinFilter;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            loadAndRenderChatHistory();
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    searchQuery = e.target.value;
+                    if (searchQuery.trim() !== '') {
+                        activeCategory = 'all';
+                        document.querySelectorAll('.capsule-item').forEach(el => {
+                            el.style.transform = '';
+                            el.style.boxShadow = '';
+                        });
+                        const allCapsule = Array.from(document.querySelectorAll('.capsule-item')).find(el => el.textContent === 'Thương hiệu');
+                        if (allCapsule) {
+                            allCapsule.style.transform = 'translateY(-2px) scale(1.02)';
+                            allCapsule.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
+                        }
+                    }
+                    renderProducts();
+                });
+            }
+            const container = document.getElementById('capsules-container');
+            const nextBtn = document.getElementById('capsule-next-btn');
+            if (container && nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    container.scrollBy({ left: 150, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
