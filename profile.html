@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -679,7 +679,9 @@
             orders[idx].status = 'cancelled';
             localStorage.setItem('ordersDatabase', JSON.stringify(orders));
             alert('Hủy đơn hàng thành công! Số lượng sản phẩm đã được hoàn lại vào kho.');
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         }
     }
 };
@@ -701,7 +703,9 @@
             orders[idx].returnRejectReason = '';
             localStorage.setItem('ordersDatabase', JSON.stringify(orders));
             alert('Gửi yêu cầu trả hàng thành công! Đang chờ Admin duyệt.');
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         }
     };
 

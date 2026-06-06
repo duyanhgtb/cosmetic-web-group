@@ -336,7 +336,9 @@
             localStorage.setItem('cartInfo', JSON.stringify([]));
             qrModal.style.display = 'none';
             alert('🎉 Chúc mừng bạn đã đặt hàng thành công!');
-            window.location.href = 'profile.html';
+            setTimeout(() => {
+                window.location.href = 'profile.html';
+            }, 1000);
         }
 
     });
