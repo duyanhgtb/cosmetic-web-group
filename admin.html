@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -1258,9 +1258,10 @@
                 }
 
                 orders[idx].status = newStatus;
-                localStorage.setItem('ordersDatabase', JSON.stringify(orders));
-                renderOrdersTable();
-                renderDashboard(); // Update stats & charts immediately
+localStorage.setItem('ordersDatabase', JSON.stringify(orders));
+renderOrdersTable();
+if (typeof renderSalesInvoices === 'function') renderSalesInvoices();
+renderDashboard(); 
             }
         }
 
@@ -1293,10 +1294,11 @@
                     alert(`Từ chối yêu cầu trả hàng đơn #${pendingRejectOrderId} thành công.`);
                 }
 
-                localStorage.setItem('ordersDatabase', JSON.stringify(orders));
-                closeRejectModal();
-                renderOrdersTable();
-                renderDashboard();
+               localStorage.setItem('ordersDatabase', JSON.stringify(orders));
+closeRejectModal();
+renderOrdersTable();
+if (typeof renderSalesInvoices === 'function') renderSalesInvoices();
+renderDashboard();
             }
         }
         function renderProductsTable() {
@@ -1553,27 +1555,32 @@
             table.style.display = 'table';
             orders.sort((a, b) => b.timestamp - a.timestamp);
             
-            orders.forEach(order => {
-                const tr = document.createElement('tr');
-                const paymentStatus = order.status === 'completed' 
-                    ? '<span class="badge badge-completed">Đã Thanh Toán</span>' 
-                    : (order.status === 'cancelled' 
-                        ? '<span class="badge badge-cancelled">Đã Hủy</span>'
-                        : '<span class="badge badge-preparing">Chờ Xử Lý</span>');
-                
-                tr.innerHTML = `
-                    <td><strong>#HD-${order.id}</strong></td>
-                    <td>${order.userEmail}</td>
-                    <td>${order.date}</td>
-                    <td>${order.items.length} loại sản phẩm</td>
-                    <td><strong>${new Intl.NumberFormat('vi-VN').format(order.total)} ₫</strong></td>
-                    <td>${paymentStatus}</td>
-                    <td>
-                        <button class="btn-action btn-ship" onclick="openSalesInvoiceModal('${order.id}')"><i class="fas fa-eye"></i> Chi tiết</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
+           orders.forEach(order => {
+    const tr = document.createElement('tr');
+    const paymentStatus = order.status === 'completed' 
+        ? '<span class="badge badge-completed">Đã Thanh Toán</span>' 
+        : (order.status === 'cancelled' 
+            ? '<span class="badge badge-cancelled">Đã Hủy</span>'
+            : '<span class="badge badge-preparing">Chờ Xử Lý</span>');
+    
+    let actionHtml = `<button class="btn-action btn-ship" onclick="openSalesInvoiceModal('${order.id}')"><i class="fas fa-eye"></i> Chi tiết</button>`;
+    if (order.status !== 'cancelled') {
+        actionHtml += ` <button class="btn-action btn-cancel" onclick="updateOrderStatus('${order.id}', 'cancelled')" style="margin-left:4px;"><i class="fas fa-times"></i> Hủy HĐ</button>`;
+    } else {
+        actionHtml += ` <span style="color:#aaa; font-style:italic; margin-left:8px;">Đã hủy</span>`;
+    }
+
+    tr.innerHTML = `
+        <td><strong>#HD-${order.id}</strong></td>
+        <td>${order.userEmail}</td>
+        <td>${order.date}</td>
+        <td>${order.items.length} loại sản phẩm</td>
+        <td><strong>${new Intl.NumberFormat('vi-VN').format(order.total)} ₫</strong></td>
+        <td>${paymentStatus}</td>
+        <td>${actionHtml}</td>
+    `;
+    tbody.appendChild(tr);
+});
         }
         function renderPurchaseInvoices() {
             const vouchers = JSON.parse(localStorage.getItem('inventoryVouchersDatabase')) || [];
