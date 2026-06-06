@@ -1,10 +1,10 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyDeGR6sA6Pg3c0Ss8918BftoslB0hY-WVQ",
-  authDomain: "cosmetic-web-b574f.firebaseapp.com",
-  projectId: "cosmetic-web-b574f",
-  storageBucket: "cosmetic-web-b574f.firebasestorage.app",
-  messagingSenderId: "232495207931",
-  appId: "1:232495207931:web:7fcbf2ae40afc173e0275e"
+  apiKey: "AIzaSyC5XBveaNQRDlZ7INXl9edi-a5kERSD91A",
+  authDomain: "web-group-cosmetic.firebaseapp.com",
+  projectId: "web-group-cosmetic",
+  storageBucket: "web-group-cosmetic.firebasestorage.app",
+  messagingSenderId: "883453860146",
+  appId: "1:883453860146:web:0baff6029e014f01499f2b"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
