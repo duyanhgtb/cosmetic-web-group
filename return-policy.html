@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chính Sách Đổi Trả Hàng | BLOOM BEAUTY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .policy-container {
+      padding: 5rem 5% 5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+      border: 1px solid #f0f0f0;
+    }
+    .policy-title {
+      color: var(--secondary);
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .policy-content h3 {
+      color: var(--primary);
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .policy-content p, .policy-content ul {
+      color: var(--text-dark);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 0.92rem;
+    }
+    .policy-content ul {
+      padding-left: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+      Freeship 15K mọi đơn hàng <span>·</span> Mua là có quà <span>·</span> Mua online nhận tại cửa hàng gần nhất
+  </div>
+  <nav class="navbar">
+      <a href="index.html" class="logo">Bloom Beauty</a>
+      
+      <div class="search-container">
+          <span class="material-icons search-icon-left">search</span>
+          <input type="text" class="search-input" placeholder="Freshian đồng giá 299k...">
+          <span class="material-icons search-icon-right">photo_camera</span>
+      </div>
+      
+      <div class="header-utilities">
+          <div class="utility-link" onclick="window.location.href='index.html#store'">
+              <span class="material-icons">storefront</span>
+              <span>Hệ thống cửa hàng</span>
+          </div>
+          <div class="utility-link" onclick="window.location.href='index.html#magazine'">
+              <span class="material-icons">edit_note</span>
+              <span>Tạp chí làm đẹp</span>
+          </div>
+          <div class="utility-link">
+              <span class="material-icons">more_horiz</span>
+          </div>
+          
+          <a href="login.html" class="utility-link">
+              <span class="material-icons" id="auth-icon">person_outline</span>
+              <span id="auth-text">Đăng nhập</span>
+          </a>
+          
+          <div class="utility-link" style="position: relative;">
+              <span class="material-icons">favorite_border</span>
+          </div>
+          
+          <div class="utility-link" id="cart-icon" style="position: relative;">
+              <span class="material-icons">shopping_bag</span>
+              <div class="cart-count" id="cart-badge">0</div>
+          </div>
+      </div>
+  </nav>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Giỏ Hàng Của Bạn</h3>
+      <span class="material-icons close-cart" id="close-cart">close</span>
+    </div>
+    
+    <div class="cart-items" id="cart-items-container">
+      <div class="cart-empty">Giỏ hàng đang trống.</div>
+    </div>
+    
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Tổng Thành Tiền:</span>
+        <span id="cart-total-price">0 ₫</span>
+      </div>
+      <button class="checkout-btn" onclick="window.location.href='checkout.html'">Thanh Toán Ngay</button>
+    </div>
+  </div>
+
+  <section class="policy-container container">
+    <h1 class="policy-title">Chính Sách Đổi Trả Hàng</h1>
+    <div class="policy-content">
+      <p>**BLOOM BEAUTY** luôn mong muốn mang đến các sản phẩm và dịch vụ làm đẹp chất lượng tốt nhất. Tuy nhiên, nếu quý khách chưa hoàn toàn hài lòng, chúng tôi luôn hỗ trợ chính sách đổi trả minh bạch.</p>
+      
+      <h3>1. Điều kiện đổi trả</h3>
+      <ul>
+        <li>Sản phẩm còn nguyên vẹn bao bì, tem mác, hộp (bao gồm cả màng co nếu có), chưa qua sử dụng.</li>
+        <li>Thời gian áp dụng đổi trả: trong vòng 07 ngày kể từ ngày nhận hàng thành công.</li>
+        <li>Có hóa đơn mua hàng hoặc thông tin đặt hàng xác nhận mua tại **BLOOM BEAUTY**.</li>
+        <li>Sản phẩm phát hiện lỗi từ nhà sản xuất hoặc bị hư hại vật lý trong quá trình vận chuyển.</li>
+      </ul>
+      
+      <h3>2. Các sản phẩm không hỗ trợ đổi trả</h3>
+      <ul>
+        <li>Sản phẩm đã bị bóc vỏ, mở nắp seal, hoặc có dấu hiệu đã qua sử dụng thử.</li>
+        <li>Các sản phẩm được bán trong chương trình xả kho đặc biệt hoặc thanh lý (trừ trường hợp lỗi từ nhà sản xuất).</li>
+        <li>Quà tặng kèm theo chương trình khuyến mãi.</li>
+      </ul>
+
+      <h3>3. Quy trình đổi trả</h3>
+      <p>Quý khách có nhu cầu đổi trả vui lòng liên hệ tổng đài hoặc nhắn tin cho Fanpage của **BLOOM BEAUTY Cosmetic** để được hỗ trợ hướng dẫn chi tiết. Sau khi xác nhận sản phẩm đủ điều kiện, quý khách có thể gửi hàng về địa chỉ kho của chúng tôi. Chúng tôi sẽ tiến hành đổi sản phẩm khác hoặc hoàn tiền trong vòng 3-5 ngày làm việc.</p>
+
+      <h3>4. Chi phí đổi trả</h3>
+      <p>Nếu lỗi sản phẩm từ phía nhà sản xuất hoặc giao sai mẫu mã: **BLOOM BEAUTY** sẽ chịu 100% chi phí vận chuyển đổi trả sản phẩm.</p>
+      <p>Nếu khách hàng thay đổi ý định mua hàng: Khách hàng vui lòng thanh toán chi phí vận chuyển để hoàn trả sản phẩm.</p>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-col">
+      <a href="index.html" class="logo">Bloom Beauty</a>
+      <p>Nhà phân phối chính hãng độc quyền của hơn 80 brand làm đẹp hàng đầu thế giới. Nâng tầm khí chất trẻ trung của bạn.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Đường Dẫn</h4>
+      <a href="index.html#home">Trang Chủ</a>
+      <a href="index.html#about">Về Chúng Tôi</a>
+      <a href="index.html#products">Sản Phẩm</a>
+    </div>
+    <div class="footer-col">
+      <h4>Chính Sách</h4>
+      <a href="privacy-policy.html">Bảo Mật Thông Tin</a>
+      <a href="payment-policy.html">Chấp Nhận Thanh Toán</a>
+      <a href="return-policy.html">Gửi Trả Hàng</a>
+    </div>
+    <div class="footer-col">
+      <h4>Liên Hệ</h4>
+      <p><i class="fas fa-envelope"></i> info@thebeauty.vn</p>
+      <p><i class="fas fa-phone"></i> 0888300368</p>
+      <p><i class="fas fa-map-marker-alt"></i> 12 Chùa Bộc, Đống Đa, TP.HN</p>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 BLOOM BEAUTY Cosmetic. Bản quyền thuộc về Thế Giới Mỹ Phẩm Trendy.</p>
+    </div>
+  </footer>
+
+      <!-- Firebase Compat SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
