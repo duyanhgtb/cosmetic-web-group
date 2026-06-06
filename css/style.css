@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --primary: #c2185b; /* Bloom Beauty rich berry color */
   --primary-dark: #9c1044;
   --primary-light: #fec5d9; /* Soft pink background */
@@ -774,7 +774,8 @@ img {
   font-weight: 700;
   margin-bottom: 10px;
   color: var(--text-dark);
-  height: 40px;
+  line-height: 1.4;
+  height: 2.8em;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;

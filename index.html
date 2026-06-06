@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -667,15 +667,15 @@
                         <div class="product-info">
                             <div class="product-category">${product.category}</div>
                             <div class="product-title">${product.title}</div>
-                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:5px; margin-bottom:0.6rem;">
                                 ${product.oldPrice && product.oldPrice > product.price 
-                                    ? `<div style="display:flex; flex-direction:column; gap:1px; line-height:1.2;">
+                                    ? `<div style="display:flex; flex-direction:column; gap:1px; line-height:1.2; white-space:nowrap;">
                                          <span style="font-size:0.75rem; color:#888; text-decoration:line-through; font-weight:500;">${new Intl.NumberFormat('vi-VN').format(product.oldPrice)} ₫</span>
                                          <span class="product-price" style="margin-bottom:0; font-size:1.05rem; color:var(--primary);">${new Intl.NumberFormat('vi-VN').format(product.price)} ₫</span>
                                        </div>`
-                                    : `<div class="product-price" style="margin-bottom:0; font-size:1.05rem;">${new Intl.NumberFormat('vi-VN').format(product.price)} ₫</div>`
+                                    : `<div class="product-price" style="margin-bottom:0; font-size:1.05rem; white-space:nowrap;">${new Intl.NumberFormat('vi-VN').format(product.price)} ₫</div>`
                                 }
-                                <div style="font-size:0.78rem; color:#888;">Còn lại: <strong style="color:var(--secondary);">${stockText}</strong></div>
+                                <div style="font-size:0.78rem; color:#888; white-space:nowrap;">Còn lại: <strong style="color:var(--secondary);">${stockText}</strong></div>
                             </div>
                             ${compareCbHtml}
                             ${btnHtml}
