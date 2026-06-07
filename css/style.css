@@ -1,8 +1,8 @@
 :root {
-  --primary: #c2185b;
+  --primary: #c2185b; 
   --primary-dark: #9c1044;
-  --primary-light: #fec5d9;
-  --yellow: #ffd3e2;
+  --primary-light: #fec5d9; 
+  --yellow: #ffd3e2; 
   --yellow-dark: #e0a6b5;
   --secondary: #000000;
   --text-dark: #111111;
@@ -26,8 +26,8 @@
   --secondary: #ffffff;
   --text-dark: #eeeeee;
   --text-light: #c2a6b2;
-  --white: #25121b;
-  --bg-light: #15090f;
+  --white: #25121b; /* Dark plum cards */
+  --bg-light: #15090f; /* Deep plum page background */
   --bg-gray: #1c0e14;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
   --primary-light: #4c1026;
@@ -203,7 +203,7 @@ img {
   font-family: 'Comfortaa', cursive;
   font-weight: 700;
   font-size: 1.65rem;
-  color: var(--primary);
+  color: var(--primary); 
   letter-spacing: -0.5px;
   display: inline-flex;
   flex-direction: column;
@@ -269,7 +269,7 @@ img {
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #007bff;
+  color: #007bff; /* Blue camera icon */
   font-size: 1.1rem;
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -350,7 +350,7 @@ img {
   width: 100%;
   overflow: hidden;
   position: relative;
-  padding-right: 40px;
+  padding-right: 40px; /* Space for the scroll button */
 }
 
 .capsules-container {
@@ -878,17 +878,6 @@ footer p {
   color: #cccccc;
   font-size: 0.85rem;
   margin-bottom: 10px;
-}
-
-.footer-contact-link {
-  color: #cccccc;
-  text-decoration: none;
-  transition: var(--transition);
-  display: inline-block;
-}
-
-.footer-contact-link:hover {
-  color: var(--primary);
 }
 
 footer p i {
@@ -1743,7 +1732,7 @@ section {
 }
 @media (max-width: 1024px) {
   .header-utilities .utility-link span:not(.material-icons) {
-    display: none;
+    display: none; /* Hide text, keep icons on small tablets/screens */
   }
 }
 
@@ -1755,7 +1744,7 @@ section {
     padding-top: var(--header-total-height);
   }
   .top-bar {
-    display: none;
+    display: none; 
   }
   .navbar {
     top: 0;
@@ -1769,7 +1758,7 @@ section {
     height: 380px;
   }
   .slide-right-column {
-    display: none;
+    display: none; /* Hide secondary banner column on smaller screens */
   }
   .slide-left-column {
     flex: 1;
@@ -1781,7 +1770,7 @@ section {
 
 @media (max-width: 768px) {
   .search-container {
-    display: none;
+    display: none; /* Hide main search bar in header on mobile */
   }
   .about-section {
     flex-direction: column;
@@ -1790,7 +1779,7 @@ section {
     height: 340px;
   }
   .slide-center-column {
-    display: none;
+    display: none; /* Hide model column on mobile to keep it clean */
   }
   .slide-title-large {
     font-size: 2rem;
@@ -3276,5 +3265,4 @@ section {
 [data-theme="dark"] .wishlist-add-cart-btn:hover {
   background: var(--primary-dark);
 }
-
 

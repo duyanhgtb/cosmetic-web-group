@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -808,7 +808,7 @@
                       <h2 style="margin: 0; color: #ff4a7d; font-size: 1.5rem; font-weight: 800; letter-spacing: 1px;">THE BEAUTY</h2>
                       <p style="margin: 5px 0 0; font-size: 0.8rem; color: #555; line-height: 1.4;">
                           12 Chùa Bộc, Đống Đa, TP.HN<br>
-                          Email: BloomBeauty@gmail.com | Hotline: 0888300368
+                          Email: BloomBeauty@thebeauty.vn | Hotline: 0888300368
                       </p>
                   </div>
                   <div style="text-align: right;">
@@ -954,16 +954,22 @@
             let completedCount = 0;
             let cancelledCount = 0;
 
-            productsDB.forEach(p => {
-                const stock = p.stock !== undefined ? p.stock : 50;
-                const cost = p.cost !== undefined ? p.cost : Math.floor(p.price * 0.6);
-                totalCost += stock * cost;
-            });
+           
+            const totalVoucherCost = vouchers.reduce((sum, v) => sum + (v.total || 0), 0);
 
             orders.forEach(order => {
                 if (order.status === 'completed') {
                     totalRevenue += order.total;
                     completedCount++;
+                    order.items.forEach(item => {
+                        // Tránh tính đúp nếu sản phẩm đó đã nằm trong hóa đơn nhập kho (vì đã tính ở totalVoucherCost)
+                        const hasVoucher = vouchers.some(v => v.productName === item.title);
+                        if (!hasVoucher) {
+                            const dbProd = productsDB.find(p => p.id === item.id);
+                            const unitCost = dbProd && dbProd.cost !== undefined ? dbProd.cost : Math.floor(item.price * 0.6);
+                            totalCost += unitCost * item.quantity;
+                        }
+                    });
                 } else if (order.status === 'preparing') {
                     preparingCount++;
                     pendingCount++;
@@ -974,6 +980,9 @@
                     cancelledCount++;
                 }
             });
+
+           
+            totalCost += totalVoucherCost;
 
             const totalProfit = totalRevenue - totalCost;
             document.getElementById('stat-revenue').textContent = new Intl.NumberFormat('vi-VN').format(totalRevenue) + ' ₫';
@@ -1005,6 +1014,7 @@
                 }
             });
 
+            
             vouchers.forEach(v => {
                 const normDate = normalizeDateString(v.date);
                 revenueMap[normDate] = (revenueMap[normDate] || 0) - v.total;
@@ -1188,16 +1198,6 @@
             orders.forEach(order => {
                 const tr = document.createElement('tr');
                 
-                let customerInfoHtml = `<strong>${order.customerName || 'Khách trực tuyến'}</strong>`;
-                if (order.customerPhone) {
-                    customerInfoHtml += `<br><span style="font-size:0.8rem; color:#555;"><i class="fas fa-phone-alt"></i> ${order.customerPhone}</span>`;
-                } else {
-                    customerInfoHtml += `<br><span style="font-size:0.8rem; color:#666;">${order.userEmail}</span>`;
-                }
-                if (order.customerAddress) {
-                    customerInfoHtml += `<br><span style="font-size:0.8rem; color:#777;"><i class="fas fa-map-marker-alt"></i> ${order.customerAddress}</span>`;
-                }
-                
                 let itemsListHtml = '<ul class="admin-order-items">';
                 order.items.forEach(item => {
                     itemsListHtml += `<li>${item.title} <strong>(x${item.quantity})</strong></li>`;
@@ -1257,7 +1257,7 @@
 
                 tr.innerHTML = `
                     <td><strong>#${order.id}</strong></td>
-                    <td>${customerInfoHtml}</td>
+                    <td>${order.userEmail}</td>
                     <td>${order.date}</td>
                     <td>${itemsListHtml}</td>
                     <td><strong>${new Intl.NumberFormat('vi-VN').format(order.total)} ₫</strong></td>
@@ -1671,9 +1671,7 @@ renderDashboard();
             
             document.getElementById('invoice-print-party-title').textContent = 'THÔNG TIN KHÁCH HÀNG';
             document.getElementById('invoice-print-party-details').innerHTML = `
-                <strong>Khách hàng:</strong> ${order.customerName || 'Khách trực tuyến'}<br>
-                <strong>Số điện thoại:</strong> ${order.customerPhone || 'Không cung cấp'}<br>
-                <strong>Địa chỉ giao nhận:</strong> ${order.customerAddress || 'Không cung cấp'}<br>
+                <strong>Khách hàng:</strong> Khách mua hàng trực tuyến<br>
                 <strong>Email:</strong> ${order.userEmail}<br>
                 <strong>Trạng thái giao hàng:</strong> ${order.status === 'completed' ? 'Đã giao thành công' : 'Đang xử lý/giao hàng'}
             `;

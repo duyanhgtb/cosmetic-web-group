@@ -363,7 +363,7 @@
     </div>
   </footer>
 
-      
+      <!-- Firebase Compat SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="js/main.js"></script>
@@ -657,39 +657,20 @@
       </div>`;
     }
     window.requestOrderCancel = function(orderId) {
-        if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {
+        if (confirm('Bạn có chắc chắn muốn gửi yêu cầu hủy đơn hàng này không?')) {
             let orders = JSON.parse(localStorage.getItem('ordersDatabase')) || [];
             const idx = orders.findIndex(o => o.id === orderId);
             if (idx > -1) {
-                const oldStatus = orders[idx].status;
-                let syncPromises = [];
-                let productsDB = null;
-                
-                if (oldStatus !== 'cancelled') {
-                    productsDB = JSON.parse(localStorage.getItem('productsDatabase')) || [];
-                    orders[idx].items.forEach(item => {
-                        const prod = productsDB.find(p => p.id === item.id);
-                        if (prod) {
-                            const currentStock = prod.stock !== undefined ? prod.stock : 50;
-                            prod.stock = currentStock + item.quantity;
-                        }
-                    });
-                    syncPromises.push(window.syncDataToFirebase('productsDatabase', JSON.stringify(productsDB)));
-                }
-                
-                orders[idx].status = 'cancelled';
-                syncPromises.push(window.syncDataToFirebase('ordersDatabase', JSON.stringify(orders)));
-                
-                Promise.all(syncPromises).then(() => {
-                    alert('Hủy đơn hàng thành công! Số lượng sản phẩm đã được hoàn lại vào kho.');
+                orders[idx].status = 'cancel_pending';
+                orders[idx].cancelRejected = false;
+                orders[idx].cancelRejectReason = '';
+                window.syncDataToFirebase('ordersDatabase', JSON.stringify(orders)).then(() => {
+                    alert('Gửi yêu cầu hủy đơn hàng thành công! Đang chờ Admin duyệt.');
                     window.location.reload();
                 }).catch(err => {
                     console.error("Error syncing cancel request:", err);
-                    if (productsDB) {
-                        localStorage.setItem('productsDatabase', JSON.stringify(productsDB));
-                    }
                     localStorage.setItem('ordersDatabase', JSON.stringify(orders));
-                    alert('Hủy đơn hàng thành công! Số lượng sản phẩm đã được hoàn lại vào kho.');
+                    alert('Gửi yêu cầu hủy đơn hàng thành công! Đang chờ Admin duyệt.');
                     window.location.reload();
                 });
             }
@@ -698,7 +679,7 @@
 
     window.requestOrderReturn = function(orderId) {
         const reason = prompt('Nhập lý do trả hàng / hoàn tiền của bạn:');
-        if (reason === null) return;
+        if (reason === null) return; // cancel clicked
         if (reason.trim() === '') {
             alert('Vui lòng nhập lý do trả hàng để gửi yêu cầu.');
             return;
@@ -711,7 +692,6 @@
             orders[idx].returnReason = reason;
             orders[idx].returnRejected = false;
             orders[idx].returnRejectReason = '';
-            
             window.syncDataToFirebase('ordersDatabase', JSON.stringify(orders)).then(() => {
                 alert('Gửi yêu cầu trả hàng thành công! Đang chờ Admin duyệt.');
                 window.location.reload();
@@ -726,4 +706,3 @@
 
   </script>
 </body>
-

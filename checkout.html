@@ -186,7 +186,7 @@
 
   </div>
 
-      
+      <!-- Firebase Compat SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="js/main.js"></script>
@@ -334,6 +334,7 @@
 
             ordersDB.push(pendingOrder);
 
+           
             Promise.all([
                 window.syncDataToFirebase('productsDatabase', JSON.stringify(productsDB)),
                 window.syncDataToFirebase('ordersDatabase', JSON.stringify(ordersDB))
@@ -344,7 +345,7 @@
                 window.location.href = 'profile.html';
             }).catch(err => {
                 console.error("Error finalizing order sync:", err);
-
+               
                 localStorage.setItem('productsDatabase', JSON.stringify(productsDB));
                 localStorage.setItem('ordersDatabase', JSON.stringify(ordersDB));
                 localStorage.setItem('cartInfo', JSON.stringify([]));
