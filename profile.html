@@ -396,22 +396,27 @@
         document.getElementById('user-email').textContent = currentUser.email;
         document.getElementById('user-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
       }
-      let allOrdersDB = JSON.parse(localStorage.getItem('ordersDatabase')) || [];
-      const myOrders = localStorage.getItem('isAdmin') === 'true' 
-          ? allOrdersDB 
-          : allOrdersDB.filter(order => order.userEmail === loggedInEmail);
-          
-      const ordersContainer = document.getElementById('orders-container');
-      
-      if (myOrders.length === 0) {
-        ordersContainer.innerHTML = '<div class="empty-orders"><i class="material-icons" style="font-size:4rem; color:#ddd; margin-bottom:1rem;">inbox</i><p>Chưa có đơn hàng nào.</p></div>';
-      } else {
-        let html = '';
-        [...myOrders].reverse().forEach(order => {
-           html += generateOrderHTML(order);
-        });
-        ordersContainer.innerHTML = html;
+      function renderOrders() {
+        let allOrdersDB = JSON.parse(localStorage.getItem('ordersDatabase')) || [];
+        const myOrders = localStorage.getItem('isAdmin') === 'true' 
+            ? allOrdersDB 
+            : allOrdersDB.filter(order => order.userEmail === loggedInEmail);
+            
+        const ordersContainer = document.getElementById('orders-container');
+        if (!ordersContainer) return;
+        
+        if (myOrders.length === 0) {
+          ordersContainer.innerHTML = '<div class="empty-orders"><i class="material-icons" style="font-size:4rem; color:#ddd; margin-bottom:1rem;">inbox</i><p>Chưa có đơn hàng nào.</p></div>';
+        } else {
+          let html = '';
+          [...myOrders].reverse().forEach(order => {
+             html += generateOrderHTML(order);
+          });
+          ordersContainer.innerHTML = html;
+        }
       }
+      window.renderOrders = renderOrders;
+      renderOrders();
       const menuItems = document.querySelectorAll('.profile-menu li[data-tab]');
       const tabPanes = document.querySelectorAll('.tab-pane');
 
