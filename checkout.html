@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -290,6 +290,9 @@
             pendingOrder = {
                 id: orderId,
                 userEmail: loggedInEmail,
+                customerName: document.getElementById('checkout-name').value.trim(),
+                customerPhone: phone,
+                customerAddress: document.getElementById('checkout-address').value.trim(),
                 date: new Date().toLocaleDateString('vi-VN'),
                 timestamp: Date.now(),
                 items: cart,

@@ -954,7 +954,6 @@
             let completedCount = 0;
             let cancelledCount = 0;
 
-            // Tính tổng vốn nhập hàng theo: tồn kho * đơn giá nhập trong quản lý sản phẩm
             productsDB.forEach(p => {
                 const stock = p.stock !== undefined ? p.stock : 50;
                 const cost = p.cost !== undefined ? p.cost : Math.floor(p.price * 0.6);
@@ -1006,7 +1005,6 @@
                 }
             });
 
-            // Khấu trừ hóa đơn nhập kho vào doanh thu và lợi nhuận của biểu đồ ngày
             vouchers.forEach(v => {
                 const normDate = normalizeDateString(v.date);
                 revenueMap[normDate] = (revenueMap[normDate] || 0) - v.total;
@@ -1190,6 +1188,13 @@
             orders.forEach(order => {
                 const tr = document.createElement('tr');
                 
+                let customerInfoHtml = `<strong>${order.customerName || 'Khách trực tuyến'}</strong>`;
+                if (order.customerPhone) {
+                    customerInfoHtml += `<br><span style="font-size:0.8rem; color:#555;"><i class="fas fa-phone-alt"></i> ${order.customerPhone}</span>`;
+                } else {
+                    customerInfoHtml += `<br><span style="font-size:0.8rem; color:#666;">${order.userEmail}</span>`;
+                }
+                
                 let itemsListHtml = '<ul class="admin-order-items">';
                 order.items.forEach(item => {
                     itemsListHtml += `<li>${item.title} <strong>(x${item.quantity})</strong></li>`;
@@ -1249,7 +1254,7 @@
 
                 tr.innerHTML = `
                     <td><strong>#${order.id}</strong></td>
-                    <td>${order.userEmail}</td>
+                    <td>${customerInfoHtml}</td>
                     <td>${order.date}</td>
                     <td>${itemsListHtml}</td>
                     <td><strong>${new Intl.NumberFormat('vi-VN').format(order.total)} ₫</strong></td>
@@ -1663,7 +1668,9 @@ renderDashboard();
             
             document.getElementById('invoice-print-party-title').textContent = 'THÔNG TIN KHÁCH HÀNG';
             document.getElementById('invoice-print-party-details').innerHTML = `
-                <strong>Khách hàng:</strong> Khách mua hàng trực tuyến<br>
+                <strong>Khách hàng:</strong> ${order.customerName || 'Khách trực tuyến'}<br>
+                <strong>Số điện thoại:</strong> ${order.customerPhone || 'Không cung cấp'}<br>
+                <strong>Địa chỉ giao nhận:</strong> ${order.customerAddress || 'Không cung cấp'}<br>
                 <strong>Email:</strong> ${order.userEmail}<br>
                 <strong>Trạng thái giao hàng:</strong> ${order.status === 'completed' ? 'Đã giao thành công' : 'Đang xử lý/giao hàng'}
             `;
