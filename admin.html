@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -962,7 +962,6 @@
                     totalRevenue += order.total;
                     completedCount++;
                     order.items.forEach(item => {
-                        // Tránh tính đúp nếu sản phẩm đó đã nằm trong hóa đơn nhập kho (vì đã tính ở totalVoucherCost)
                         const hasVoucher = vouchers.some(v => v.productName === item.title);
                         if (!hasVoucher) {
                             const dbProd = productsDB.find(p => p.id === item.id);

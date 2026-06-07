@@ -517,7 +517,7 @@ class SliderManager {
         this.nextBtn = document.getElementById('slider-next-btn');
         this.dotsContainer = document.getElementById('slider-dots');
         
-        if (!this.wrapper) return; // Only run on pages containing the slider
+        if (!this.wrapper) return;
 
         this.slides = Array.from(this.wrapper.querySelectorAll('.slide'));
         this.currentIndex = 0;
